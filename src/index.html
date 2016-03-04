@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Angular 2 QuickStart</title>
+
+    <link rel="stylesheet" href="assets/style/bundle.css">
+</head>
+<!-- 3. Display the application -->
+<body>
+
+<div class="row">
+    <div class="large-offset-3 large-6 columns">
+        <span>The app is good!</span>
+        <rw-app>Loading...</rw-app>
+    </div>
+</div>
+
+<!-- inject:js -->
+<script src="libs/es6-shim/es6-shim.min.js"></script>
+<script src="libs/systemjs/dist/system-polyfills.js"></script>
+<script src="libs/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+<script src="libs/angular2/bundles/angular2-polyfills.js"></script>
+<script src="libs/systemjs/dist/system.src.js"></script>
+<script src="libs/rxjs/bundles/Rx.js"></script>
+<script src="libs/angular2/bundles/angular2.dev.js"></script>
+<script src="libs/angular2/bundles/router.dev.js"></script>
+<script src="libs/angular2/bundles/http.dev.js"></script>
+<script src="libs/jquery/jquery.js"></script>
+<script src="libs/foundation/foundation.js"></script>
+<!-- endinject -->
+
+<!-- Configure SystemJS -->
+<script>
+    System.config({
+        packages: {
+            app: {
+                format: 'register',
+                defaultExtension: 'js'
+            }
+        }
+    });
+    System.import('./app/main')
+            .then(null, console.error.bind(console));
+</script>
+
+</body>
+</html>
