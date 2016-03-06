@@ -15,7 +15,9 @@
     "gulp-load-plugins": "^1.1.0",
     "gulp-plumber": "^1.0.1",
     "gulp-sass": "^2.2.0",
+    "gulp-sequence": "^0.4.5",
     "gulp-shell": "^0.5.2",
+    "gulp-sourcemaps": "^1.6.0",
     "gulp-task-listing": "^1.0.1",
     "gulp-tslint": "^4.3.3",
     "gulp-tslint-stylish": "^1.1.1",
@@ -47,6 +49,7 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "serve": "gulp serve",
+    "serveP": "gulp serveP",
     "typings": "typings",
     "postinstall": "typings install",
     "test": "echo \"Error: no test specified\" && exit 1"

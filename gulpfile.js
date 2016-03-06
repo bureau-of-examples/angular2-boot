@@ -1,27 +1,20 @@
 
 ///////////////////////// Gulp components /////////////////////////////////
 var del = require('del');
+var glob = require("glob");
 var gulp = require('gulp');
 var config = require('./gulpfile.config');
 var $ = require('gulp-load-plugins')({lazy: true});
-var tslint = require('gulp-tslint');
-var sass = require('gulp-sass');
-var shell = require('gulp-shell');
-var glob = require("glob");
 
 ///////////////////////// Config //////////////////////////////////////////
 var scssPaths = config.styleFolder + '/**/*.scss';
-
-var jsLibs = config.angular2Libs.concat([
-    config.srcLibsFolder + '/jquery/jquery.js',
-    config.srcLibsFolder + '/foundation/foundation.js'
-]);
-jsLibs = batchReplace(jsLibs, 'node_modules', config.srcLibsFolder);
-
-console.log('lib paths:');
-console.log(jsLibs);
+var jsLibPaths = batchReplace(config.jsLibs, 'node_modules', config.srcLibsFolder);
+var tsPaths = 'src/app/**/*.ts';
 
 ///////////////////////// Tasks ///////////////////////////////////////////
+gulp.task('default', ['help']);
+
+
 gulp.task('help', $.taskListing);
 
 
@@ -30,48 +23,18 @@ gulp.task('clean-srcLibs', [], function(done){
 });
 
 
-gulp.task('copy-angular2-libs', ['clean-srcLibs'], function(){
+gulp.task('copy-to-srcLibs', ['clean-srcLibs'], function(){
     return gulp
-        .src(config.angular2Libs, {base: 'node_modules'})
+        .src(config.jsLibs, {base: 'node_modules'})
         .pipe(gulp.dest(config.srcLibsFolder));
 });
 
 
-gulp.task('copy-foundation-sites-lib', ['clean-srcLibs'], function(){
-    return gulp
-        .src(config.foundationSitesLib)
-        .pipe(gulp.dest(config.srcLibsFolder + '/foundation'));
+gulp.task('inject-js', ['copy-to-srcLibs'], function(){
 
-});
-
-
-gulp.task('copy-jquery-lib', ['clean-srcLibs'], function(){
-
-    return gulp
-        .src('node_modules/jquery/dist/jquery.js')
-        .pipe(gulp.dest(config.srcLibsFolder + '/jquery'));
-});
-
-
-gulp.task('refresh-srcLibs', ['copy-angular2-libs', 'copy-jquery-lib', 'copy-foundation-sites-lib']);
-
-
-gulp.task('bundle-libs', ['refresh-srcLibs'], function(){
-    //todo this bundle is not usable
-    return gulp
-        .src(jsLibs)
-        .pipe($.uglify())
-        .pipe($.concat('libs.bundle.js'))
-        .pipe(gulp.dest('src/libs'));
-});
-
-
-gulp.task('inject-js', ['bundle-libs'], function(){
-
-    //var jsLibs = ['src/libs/libs.bundle.js'];
     return gulp
         .src('src/index.html')
-        .pipe($.inject(gulp.src(jsLibs, {read: false}), {relative: true}))
+        .pipe($.inject(gulp.src(jsLibPaths, {read: false}), {relative: true}))
         .pipe(gulp.dest('src'));
 });
 
@@ -85,9 +48,9 @@ gulp.task('clean-scss', [], function(done){
         console.log(files);
 
         var cssFiles = batchReplace(files, '.scss', '.css');
-        var mapFiles = batchReplace(files, '.scss', '.css.map');
+        //map is embedded in css file
 
-        clean(cssFiles.concat(mapFiles), done);
+        clean(cssFiles, done);
     });
 });
 
@@ -95,7 +58,9 @@ gulp.task('clean-scss', [], function(done){
 gulp.task('compile-scss', ['clean-scss'], function(){
     return gulp
         .src(scssPaths)
-        .pipe(sass().on('error', sass.logError))
+        .pipe($.sourcemaps.init())
+        .pipe($.sass({}).on('error', $.sass.logError))
+        .pipe($.sourcemaps.write())
         .pipe(gulp.dest(config.styleFolder));
 });
 
@@ -109,15 +74,15 @@ gulp.task('lint-ts', [], function(){
 
     return gulp
         .src('src/**/*.ts')
-        .pipe(tslint({
+        .pipe($.tslint({
             rulesDirectory: ["node_modules/ng2lint/dist/src"]
         }))
-        .pipe(tslint.report('verbose'));
+        .pipe($.tslint.report('verbose'));
 });
 
 
 gulp.task('clean-ts', [], function(done){
-    glob('src/app/**/*.ts', {}, function(err, files){
+    glob(tsPaths, {}, function(err, files){
         if(err !== null)
             throw err;
 
@@ -132,17 +97,28 @@ gulp.task('clean-ts', [], function(done){
 });
 
 
-gulp.task('compile-ts', ['lint-ts'], shell.task(['npm run tsc']));
+gulp.task('compile-ts', ['lint-ts'], $.shell.task(['npm run tsc']));
 
 
 gulp.task('watch-ts', [], function(){
-    gulp.watch(scssPaths, ['compile-ts']);
+    gulp.watch(tsPaths, ['compile-ts']);
 });
 
 //todo process font and image
 
-gulp.task('serve', ['compile-scss', 'compile-ts', 'inject-js', 'watch-scss', 'watch-ts'], shell.task(['node serve.js']));
 
+gulp.task('compile-and-watch-ts', [], $.sequence('compile-ts', 'watch-ts'));
+
+
+gulp.task('compile-and-watch-scss', [], $.sequence('compile-scss', 'watch-scss'));
+
+
+//debugging friendly serve
+gulp.task('serve', ['compile-and-watch-scss', 'compile-and-watch-ts', 'inject-js'], $.shell.task(['node serve.js']));
+
+
+//perfromance optimized serve with no watch.
+gulp.task('serveP', [/*todo*/], $.shell.task(['node serve.js']));
 
 ////////////////////////// Utilities //////////////////////////////////////
 function clean(path, done) {

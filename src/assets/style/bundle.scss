@@ -1,0 +1,11 @@
+
+@import "../../../node_modules/foundation-sites/scss/foundation";
+
+@include foundation-everything;
+
+body {
+  color: red;
+  background-color: blue;
+  border: 1px solid black;
+}
+

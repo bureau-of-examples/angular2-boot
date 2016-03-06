@@ -1,4 +1,4 @@
-module.exports = {
+var config = {
     angular2Libs: [
         'node_modules/es6-shim/es6-shim.min.js',
         'node_modules/systemjs/dist/system-polyfills.js',
@@ -10,7 +10,16 @@ module.exports = {
         'node_modules/angular2/bundles/router.dev.js',
         'node_modules/angular2/bundles/http.dev.js'
     ],
-    foundationSitesLib: 'node_modules/foundation-sites/dist/foundation.js',
+    foundationSitesLibs: [
+        'node_modules/jquery/dist/jquery.js',
+        'node_modules/foundation-sites/dist/foundation.js'
+    ],
     srcLibsFolder: './src/libs',
     styleFolder: 'src/assets/style'
 };
+
+config.jsLibs = config.angular2Libs.concat(config.foundationSitesLibs);
+
+module.exports = config;
+
+
