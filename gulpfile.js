@@ -117,8 +117,29 @@ gulp.task('compile-and-watch-scss', [], $.sequence('compile-scss', 'watch-scss')
 gulp.task('serve', ['compile-and-watch-scss', 'compile-and-watch-ts', 'inject-js'], $.shell.task(['node serve.js']));
 
 
+gulp.task('bundle-libs', ['copy-to-srcLibs'], function(){
+    return gulp
+        .src(jsLibPaths.slice(1)) //es6-shim must load separately otherwise script error in Chrome
+        .pipe($.plumber())//.pipe($.sourcemaps.init())
+        .pipe($.concat('libs.bundle.js'))
+        .pipe(gulp.dest(config.srcLibsFolder))
+        .pipe($.rename('libs.bundle.min.js'))
+        .pipe($.uglify())//.pipe($.sourcemaps.write())
+        .pipe(gulp.dest(config.srcLibsFolder));
+});
+
+
+gulp.task('inject-libs-bundle', ['bundle-libs'], function(){
+    return gulp
+        .src('src/index.html')
+        .pipe($.inject(gulp.src([jsLibPaths[0], './src/libs/libs.bundle.min.js'], {read: false}), {relative: true}))
+        .pipe(gulp.dest('src'));
+});
+
+
 //perfromance optimized serve with no watch.
-gulp.task('serveP', [/*todo*/], $.shell.task(['node serve.js']));
+gulp.task('serveP', ['inject-libs-bundle'], $.shell.task(['node serve.js']));
+
 
 ////////////////////////// Utilities //////////////////////////////////////
 function clean(path, done) {

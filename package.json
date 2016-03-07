@@ -14,6 +14,7 @@
     "gulp-inline-ng2-template": "^1.1.0",
     "gulp-load-plugins": "^1.1.0",
     "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.2.0",
     "gulp-sequence": "^0.4.5",
     "gulp-shell": "^0.5.2",
@@ -49,7 +50,7 @@
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "serve": "gulp serve",
-    "serveP": "gulp serveP",
+    "app": "gulp serveP",
     "typings": "typings",
     "postinstall": "typings install",
     "test": "echo \"Error: no test specified\" && exit 1"
