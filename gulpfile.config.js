@@ -14,8 +14,10 @@ var config = {
         'node_modules/jquery/dist/jquery.js',
         'node_modules/foundation-sites/dist/foundation.js'
     ],
+    fontAwesomeFonts: 'node_modules/font-awesome/fonts/*.*',
     srcLibsFolder: './src/libs',
-    styleFolder: 'src/assets/style'
+    styleFolder: 'src/assets/style',
+    fontsFolder: './src/assets/fonts'
 };
 
 config.jsLibs = config.angular2Libs.concat(config.foundationSitesLibs);

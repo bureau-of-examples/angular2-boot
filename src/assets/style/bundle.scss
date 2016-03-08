@@ -1,6 +1,5 @@
 
 @import "../../../node_modules/foundation-sites/scss/foundation";
-
 @include foundation-everything;
 
 body {
@@ -9,3 +8,16 @@ body {
   border: 1px solid black;
 }
 
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+.ab-spinning {
+  animation-name: spin;
+  animation-duration: 4000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@import "../../../node_modules/font-awesome/scss/font-awesome";

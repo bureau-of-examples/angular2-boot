@@ -11,6 +11,7 @@ var yargs = require('yargs');
 var scssPaths = config.styleFolder + '/**/*.scss';
 var jsLibPaths = batchReplace(config.jsLibs, 'node_modules', config.srcLibsFolder);
 var tsPaths = 'src/app/**/*.ts';
+var browserSupport = ['> 5%'];
 
 ///////////////////////// Tasks ///////////////////////////////////////////
 gulp.task('default', ['help']);
@@ -56,14 +57,44 @@ gulp.task('clean-scss', [], function(done){
 });
 
 
-gulp.task('compile-scss', ['clean-scss'], function(){
+gulp.task('clean-fonts', [], function(done){
+    clean([config.fontsFolder + '/*.*'], done)
+});
+
+
+gulp.task('copy-fonts', ['clean-fonts'], function(){
+    return gulp
+        .src(config.fontAwesomeFonts)
+        .pipe(gulp.dest(config.fontsFolder));
+});
+
+
+var preCompileScssTasks = ['clean-scss', 'copy-fonts'];
+
+gulp.task('compile-scss', preCompileScssTasks, function(){
+
+    return compileScss(false);
+});
+
+gulp.task('compile-scssP', preCompileScssTasks, function(){
+
+    return compileScss(true);
+});
+
+
+function compileScss(production){
+    var prefixer = $.autoprefixer({browsers: browserSupport, cascade: false});
+    var cassOptions = production ? {outputStyle: 'compressed'} : {};
+    var generateSourcemap = !production || yargs.argv.sourcemap;
+
     return gulp
         .src(scssPaths)
-        .pipe($.sourcemaps.init())
-        .pipe($.sass({}).on('error', $.sass.logError))
-        .pipe($.sourcemaps.write())
+        .pipe($.if(generateSourcemap, $.sourcemaps.init()))
+        .pipe($.sass(cassOptions).on('error', $.sass.logError))
+        .pipe(prefixer)
+        .pipe($.if(generateSourcemap, $.sourcemaps.write()))
         .pipe(gulp.dest(config.styleFolder));
-});
+}
 
 
 gulp.task('watch-scss', [], function(){
@@ -141,7 +172,7 @@ gulp.task('inject-libs-bundle', ['bundle-libs'], function(){
 
 
 //perfromance optimized serve with no watch.
-gulp.task('serveP', ['inject-libs-bundle'], $.shell.task(['node serve.js']));
+gulp.task('serveP', ['compile-scssP', 'inject-libs-bundle'], $.shell.task(['node serve.js']));
 
 
 ////////////////////////// Utilities //////////////////////////////////////
