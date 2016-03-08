@@ -5,6 +5,7 @@ var glob = require("glob");
 var gulp = require('gulp');
 var config = require('./gulpfile.config');
 var $ = require('gulp-load-plugins')({lazy: true});
+var yargs = require('yargs');
 
 ///////////////////////// Config //////////////////////////////////////////
 var scssPaths = config.styleFolder + '/**/*.scss';
@@ -120,11 +121,13 @@ gulp.task('serve', ['compile-and-watch-scss', 'compile-and-watch-ts', 'inject-js
 gulp.task('bundle-libs', ['copy-to-srcLibs'], function(){
     return gulp
         .src(jsLibPaths.slice(1)) //es6-shim must load separately otherwise script error in Chrome
-        .pipe($.plumber())//.pipe($.sourcemaps.init())
+        .pipe($.plumber())
+        .pipe($.if(yargs.argv.sourcemap, $.sourcemaps.init()))
         .pipe($.concat('libs.bundle.js'))
         .pipe(gulp.dest(config.srcLibsFolder))
         .pipe($.rename('libs.bundle.min.js'))
-        .pipe($.uglify())//.pipe($.sourcemaps.write())
+        .pipe($.uglify())
+        .pipe($.if(yargs.argv.sourcemap, $.sourcemaps.write()))
         .pipe(gulp.dest(config.srcLibsFolder));
 });
 
