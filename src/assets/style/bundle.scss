@@ -13,6 +13,11 @@ body {
   to {transform:rotate(360deg);}
 }
 
+.router-link-active {
+  @extend .is-active;
+  font-weight: bold;
+}
+
 .ab-spinning {
   animation-name: spin;
   animation-duration: 4000ms;

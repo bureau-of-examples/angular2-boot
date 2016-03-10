@@ -1,8 +1,11 @@
 ///<reference path="../../typings/browser.d.ts" />
 
 import {Component, AfterViewInit, ElementRef} from 'angular2/core';
-import {ROUTER_PROVIDERS} from 'angular2/router';
-import {bootstrap}    from 'angular2/platform/browser';
+import {ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {bootstrap}          from 'angular2/platform/browser';
+import {HomeComponent}      from './home/HomeComponent';
+import {ProductsComponent}  from './products/ProductsComponent';
+import {ContactComponent}   from './contact/ContactComponent';
 
 declare function $(element: any): any;
 declare module Foundation {
@@ -11,13 +14,17 @@ declare module Foundation {
     }
 }
 
-
 @Component({
     selector: 'ab-main',
     templateUrl: './app/main.component.html',
     providers: [],
-    directives: []
+    directives: [ROUTER_DIRECTIVES]
 })
+@RouteConfig([
+    {path:'/home', name: 'Home', component: HomeComponent, useAsDefault: true},
+    {path:'/products', name: 'Products', component: ProductsComponent},
+    {path:'/contact', name: 'Contact', component: ContactComponent}
+])
 export class MainComponent implements AfterViewInit {
 
     message = 'Angular2 starter project';
@@ -30,8 +37,8 @@ export class MainComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        console.log(this.elementRef.nativeElement);
-        new Foundation.Tabs($(this.elementRef.nativeElement).find('.tabs'));
+        //console.log(this.elementRef.nativeElement);
+        //new Foundation.Tabs($(this.elementRef.nativeElement).find('.tabs'));
     }
 
     incrementCounter():void {
