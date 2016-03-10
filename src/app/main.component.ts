@@ -1,7 +1,16 @@
 ///<reference path="../../typings/browser.d.ts" />
 
-import {Component, AfterViewInit, ElementRef} from 'angular2/core';
-import {ROUTER_PROVIDERS, RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
+import {
+        Component,
+        AfterViewInit,
+        ElementRef
+}                           from 'angular2/core';
+import {
+        ROUTER_PROVIDERS,
+        RouteConfig,
+        ROUTER_DIRECTIVES,
+        Location
+}                            from 'angular2/router';
 import {bootstrap}          from 'angular2/platform/browser';
 import {HomeComponent}      from './home/HomeComponent';
 import {ProductsComponent}  from './products/ProductsComponent';
@@ -31,6 +40,7 @@ export class MainComponent implements AfterViewInit {
     counter = 0;
 
     constructor(
+        private location: Location,
         private elementRef: ElementRef
     ) {
         console.log('MainComponent.constructor');
@@ -43,6 +53,10 @@ export class MainComponent implements AfterViewInit {
 
     incrementCounter():void {
         this.counter++;
+    }
+
+    pathStartWith(portion : string): boolean {
+        return this.location.path().startsWith(portion);
     }
 }
 
