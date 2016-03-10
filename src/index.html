@@ -6,26 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Angular 2 QuickStart</title>
-
+    <title>Angular2 Boot</title>
     <link rel="stylesheet" href="assets/style/bundle.css">
 </head>
-<!-- 3. Display the application -->
+
 <body>
 
 <div class="row">
     <div class="large-offset-3 large-6 columns">
-        <span>The app is good!</span>
-        <rw-app>
-            <i class="fa fa-spinner fa-4x ab-spinning" title="Loading..."></i>
-        </rw-app>
-        <i class="fa fa-spinner fa-4x ab-spinning" title="Loading..."></i>
+        <div>
+            <span>The app is good!</span>
+            <i class="fa fa-rotate-right fa-2x ab-spinning" title=""></i>
+        </div>
+
+        <div>
+            <ab-main>
+                <i class="fa fa-spinner fa-4x ab-spinning" title="Loading..."></i>
+            </ab-main>
+        </div>
+
+
     </div>
 </div>
 
 <!-- inject:js -->
 <script src="libs/es6-shim/es6-shim.min.js"></script>
-<script src="libs/libs.bundle.min.js"></script>
+<script src="libs/systemjs/dist/system-polyfills.js"></script>
+<script src="libs/angular2/es6/dev/src/testing/shims_for_IE.js"></script>
+<script src="libs/angular2/bundles/angular2-polyfills.js"></script>
+<script src="libs/systemjs/dist/system.src.js"></script>
+<script src="libs/rxjs/bundles/Rx.js"></script>
+<script src="libs/angular2/bundles/angular2.dev.js"></script>
+<script src="libs/angular2/bundles/router.dev.js"></script>
+<script src="libs/angular2/bundles/http.dev.js"></script>
+<script src="libs/jquery/dist/jquery.js"></script>
+<script src="libs/foundation-sites/dist/foundation.js"></script>
 <!-- endinject -->
 
 <!-- Configure SystemJS -->
@@ -38,8 +53,7 @@
             }
         }
     });
-    System.import('./app/main')
-            .then(null, console.error.bind(console));
+    System.import('./app/main.component').then(null, console.error.bind(console));
 </script>
 
 </body>
