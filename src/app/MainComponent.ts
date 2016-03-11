@@ -31,7 +31,7 @@ declare module Foundation {
 })
 @RouteConfig([
     {path:'/home', name: 'Home', component: HomeComponent, useAsDefault: true},
-    {path:'/products', name: 'Products', component: ProductsComponent},
+    {path:'/products/...', name: 'Products', component: ProductsComponent},
     {path:'/contact', name: 'Contact', component: ContactComponent}
 ])
 export class MainComponent implements AfterViewInit {
