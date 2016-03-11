@@ -25,4 +25,12 @@ body {
   animation-timing-function: linear;
 }
 
+.site-header {
+
+  margin-bottom: 1em;
+  img {
+    width: 400px;
+  }
+}
+
 @import "../../../node_modules/font-awesome/scss/font-awesome";

@@ -1,18 +1,21 @@
 
+<ab-header bannerPath="assets/img/banner.png">
+</ab-header>
 
-<ul class="tabs">
-    <li class="tabs-title"><a [routerLink]="['Home']" [attr.aria-selected]="pathStartWith('/home')">Home</a></li>
-    <li class="tabs-title"><a [routerLink]="['Products']" [attr.aria-selected]="pathStartWith('/products')">Products</a></li>
-    <li class="tabs-title"><a [routerLink]="['Contact']" [attr.aria-selected]="pathStartWith('/contact')">Contact</a></li>
-</ul>
-<div class="tab-content">
-    <div class="tabs-panel is-active">
-        <router-outlet></router-outlet>
+<main>
+    <ul class="tabs">
+        <li class="tabs-title"><a [routerLink]="['Home']" [attr.aria-selected]="pathStartWith('/home')">Home</a></li>
+        <li class="tabs-title"><a [routerLink]="['Products']" [attr.aria-selected]="pathStartWith('/products')">Products</a></li>
+        <li class="tabs-title"><a [routerLink]="['Contact']" [attr.aria-selected]="pathStartWith('/contact')">Contact</a></li>
+    </ul>
+    <div class="tab-content">
+        <div class="tabs-panel is-active">
+            <router-outlet></router-outlet>
+        </div>
     </div>
-</div>
 
 
-
+</main>
 
 
 

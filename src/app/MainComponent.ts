@@ -15,6 +15,7 @@ import {bootstrap}          from 'angular2/platform/browser';
 import {HomeComponent}      from './home/HomeComponent';
 import {ProductsComponent}  from './products/ProductsComponent';
 import {ContactComponent}   from './contact/ContactComponent';
+import {HeaderComponent}    from './HeaderComponent';
 
 declare function $(element: any): any;
 declare module Foundation {
@@ -27,7 +28,7 @@ declare module Foundation {
     selector: 'ab-main',
     templateUrl: './app/MainComponent.html',
     providers: [],
-    directives: [ROUTER_DIRECTIVES]
+    directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([
     {path:'/home', name: 'Home', component: HomeComponent, useAsDefault: true},
