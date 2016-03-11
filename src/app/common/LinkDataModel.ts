@@ -1,6 +1,6 @@
 
 
-export class LinkData {
+export class LinkDataModel {
     text: string;
     routeName: string;
 }

@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {LinkData} from '../common/LinkData';
+import {LinkDataModel} from '../common/LinkDataModel';
 
 @Component({
     selector: 'ab-product-categories',
@@ -9,7 +9,7 @@ import {LinkData} from '../common/LinkData';
 })
 export class ProductCategoriesComponent {
 
-    categoryLinks: LinkData[] = [
+    categoryLinks: LinkDataModel[] = [
         {
             text: 'Phone',
             routeName: 'PhoneSearch'
