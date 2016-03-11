@@ -25,7 +25,7 @@ declare module Foundation {
 
 @Component({
     selector: 'ab-main',
-    templateUrl: './app/main.component.html',
+    templateUrl: './app/MainComponent.html',
     providers: [],
     directives: [ROUTER_DIRECTIVES]
 })
