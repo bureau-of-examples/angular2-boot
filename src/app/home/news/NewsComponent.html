@@ -1,0 +1,10 @@
+<div *ngIf="newsList.length == 0">No news available.</div>
+<ul class="ab-news-list" *ngIf="newsList.length > 0">
+    <li *ngFor="#item of newsList" class="callout">
+        <h1 style="margin-bottom: 0.5em; font-weight: 400; font-size:1.1em;">
+            <a href="#" class="ab-title">[{{item.publishDate | date:'shortDate'}}] {{item.title}}</a>
+        </h1>
+
+        <p>{{item.summary}}</p>
+    </li>
+</ul>

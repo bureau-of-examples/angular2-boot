@@ -5,7 +5,7 @@ import {NewsComponent} from './news/NewsComponent';
 import {SupportComponent} from './support/SupportComponent';
 import {ContactComponent} from './contact/ContactComponent';
 import {DocsComponent} from './docs/DocsComponent';
-import {LinkDataModel} from '../common/LinkDataModel';
+import {LinkDataModel} from '../common/model/LinkDataModel';
 
 @Component({
     templateUrl: './app/home/HomeComponent.html',

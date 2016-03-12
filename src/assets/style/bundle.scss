@@ -3,8 +3,13 @@
 @include foundation-everything;
 
 body {
-  color: red;
+  color: orangered;
   background-color: #efefef;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
 }
 
 @keyframes spin {
@@ -41,6 +46,34 @@ body {
   background-color:#fefefe;
   padding:1em;
   min-height:12em;
+}
+
+.ab-news-list {
+  margin-left: 0;
+
+  li {
+    list-style-type: none;
+    background-color: #f7f7f7;
+    margin: 1em 0;
+    border-radius: 5px;
+    padding: 1em;
+    color: orangered;
+
+    .ab-title {
+      text-transform: capitalize;
+      color: orange;
+    }
+
+    p:first-letter {
+      text-transform: capitalize;
+      font-size: 1.2em;
+      font-weight:700;
+    }
+  }
+
+  li:first-child {
+    margin-top: 0;
+  }
 }
 
 .tabs.ab-main-nav {

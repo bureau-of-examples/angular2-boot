@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {ROUTER_DIRECTIVES} from 'angular2/router';
-import {LinkDataModel} from '../common/LinkDataModel';
+import {LinkDataModel} from '../common/model/LinkDataModel';
 
 @Component({
     selector: 'ab-product-categories',

@@ -1,6 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
-import {LinkDataModel} from '../common/LinkDataModel';
+import {LinkDataModel} from '../common/model/LinkDataModel';
 import {FinanceComponent} from './finance/FinanceComponent';
 import {EducationComponent} from './education/EducationComponent';
 

@@ -1,7 +1,7 @@
 import {Component} from 'angular2/core';
 
 @Component({
-    template: 'docs component'
+    templateUrl: './app/home/docs/DocsComponent.html'
 })
 export class DocsComponent {
 }
