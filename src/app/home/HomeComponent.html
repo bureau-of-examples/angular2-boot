@@ -1,0 +1,8 @@
+<ul class="menu ab-sub-menu" >
+    <li *ngFor="#link of navLinks">
+        <a [routerLink]="[link.routeName]">{{link.text}}</a>
+    </li>
+</ul>
+<div class="ab-main" >
+    <router-outlet></router-outlet>
+</div>

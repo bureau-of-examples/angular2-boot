@@ -12,10 +12,11 @@ import {
         Location
 }                            from 'angular2/router';
 import {bootstrap}          from 'angular2/platform/browser';
+import {HeaderComponent}    from './HeaderComponent';
 import {HomeComponent}      from './home/HomeComponent';
 import {ProductsComponent}  from './products/ProductsComponent';
-import {ContactComponent}   from './contact/ContactComponent';
-import {HeaderComponent}    from './HeaderComponent';
+import {CaseStudiesComponent}   from './case-studies/CaseStudiesComponent';
+
 
 declare function $(element: any): any;
 declare module Foundation {
@@ -31,9 +32,9 @@ declare module Foundation {
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([
-    {path:'/home', name: 'Home', component: HomeComponent, useAsDefault: true},
+    {path:'/home/...', name: 'Home', component: HomeComponent, useAsDefault: true},
     {path:'/products/...', name: 'Products', component: ProductsComponent},
-    {path:'/contact', name: 'Contact', component: ContactComponent}
+    {path:'/case-studies/...', name: 'CaseStudies', component: CaseStudiesComponent}
 ])
 export class MainComponent implements AfterViewInit {
 

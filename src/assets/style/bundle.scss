@@ -5,17 +5,11 @@
 body {
   color: red;
   background-color: #efefef;
-  border: 1px solid black;
 }
 
 @keyframes spin {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
-}
-
-.router-link-active {
-  @extend .is-active;
-  font-weight: bold;
 }
 
 .ab-spinning {
@@ -25,12 +19,42 @@ body {
   animation-timing-function: linear;
 }
 
-.site-header {
-
+.ab-site-header {
   margin-bottom: 1em;
   img {
     width: 400px;
   }
+}
+
+.ab-sub-menu {
+  background-color:#e6e6e6;
+  padding-top:5px;
+  font-weight: 300;
+
+  .router-link-active {
+    background-color:#fefefe;
+    font-weight: 500;
+  }
+}
+
+.ab-main {
+  background-color:#fefefe;
+  padding:1em;
+  min-height:12em;
+}
+
+.tabs.ab-main-nav {
+
+  .tabs-title {
+    a {
+      font-size: 1em;
+    }
+  }
+}
+
+.router-link-active {
+  @extend .is-active;
+  font-weight: bold;
 }
 
 @import "../../../node_modules/font-awesome/scss/font-awesome";

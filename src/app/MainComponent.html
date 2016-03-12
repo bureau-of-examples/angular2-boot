@@ -3,19 +3,25 @@
 </ab-header>
 
 <main>
-    <ul class="tabs">
+    <ul class="tabs ab-main-nav">
         <li class="tabs-title"><a [routerLink]="['Home']" [attr.aria-selected]="pathStartWith('/home')">Home</a></li>
         <li class="tabs-title"><a [routerLink]="['Products']" [attr.aria-selected]="pathStartWith('/products')">Products</a></li>
-        <li class="tabs-title"><a [routerLink]="['Contact']" [attr.aria-selected]="pathStartWith('/contact')">Contact</a></li>
+        <li class="tabs-title"><a [routerLink]="['CaseStudies']" [attr.aria-selected]="pathStartWith('/case-studies')">Case Studies</a></li>
     </ul>
     <div class="tab-content">
-        <div class="tabs-panel is-active">
+        <div class="tabs-panel is-active" style="padding:0">
             <router-outlet></router-outlet>
         </div>
     </div>
 
 
 </main>
+
+<hr>
+
+<footer>
+    This is footer.
+</footer>
 
 
 
