@@ -6,6 +6,7 @@ npm-debug.log
 *.map
 *Component.js
 *Model.js
+*Service.js
 /src/libs/*
 /src/assets/fonts/*
 bundle.css

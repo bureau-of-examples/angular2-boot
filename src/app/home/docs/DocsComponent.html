@@ -1,15 +1,17 @@
 <div class="top-bar">
     <div class="row">
         <div class="small-9 columns">
-            <ul class="menu">
-                <li style="width:100%; padding-right:10px;"><input type="search" placeholder="Search" style="width:100%;"></li>
-                <li style="width:1px" >
-                    <button type="button" class="button">Search</button>
-                </li>
-                <li style="padding-left: 5px; color: blue;">
-                    <a href="javascript:void(0)"><i class="fa fa-question-circle"></i></a>
-                </li>
-            </ul>
+            <form>
+                <ul class="menu">
+                    <li style="width:100%; padding-right:10px;"><input #searchInput type="search" placeholder="Search" style="width:100%;"></li>
+                    <li style="width:1px" >
+                        <button type="submit" class="button" (click)="search(searchInput.value)">Search</button>
+                    </li>
+                    <li style="padding-left: 5px; color: blue;">
+                        <a href="javascript:void(0)"><i class="fa fa-question-circle"></i></a>
+                    </li>
+                </ul>
+            </form>
         </div>
         <div class="small-3 columns clearfix">
             <ul class="menu pull-right">
@@ -17,8 +19,13 @@
             </ul>
         </div>
     </div>
-
 </div>
-<div>
-    This is the result
+<div class="row ab-doc-list">
+    <div *ngIf="docList.length == 0" class="callout">No result found.</div>
+    <div *ngFor="#item of docList" class="callout">
+        <h1>{{item.title}}</h1>
+        <p>{{item.description}}</p>
+        <hr>
+        <span style="font-weight: 300">{{item.lastUpdated | date:'shortDate'}} by {{item.lastUpdatedBy}}</span>
+    </div>
 </div>
