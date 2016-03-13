@@ -3,8 +3,7 @@ import {DocSummaryModel} from '../../common/model/DocSummaryModel';
 import {DocsService} from './DocsService';
 
 @Component({
-    templateUrl: './app/home/docs/DocsComponent.html',
-    providers: [DocsService]
+    templateUrl: './app/home/docs/DocsComponent.html'
 })
 export class DocsComponent {
 
@@ -21,7 +20,7 @@ export class DocsComponent {
             .subscribe(
                 result => this.docList = result,
                 error => console.log(error),
-                () => {}
+                () => console.log('done')
             );
     }
 }

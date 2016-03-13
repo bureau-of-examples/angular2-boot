@@ -16,6 +16,9 @@ import {HeaderComponent}    from './HeaderComponent';
 import {HomeComponent}      from './home/HomeComponent';
 import {ProductsComponent}  from './products/ProductsComponent';
 import {CaseStudiesComponent}   from './case-studies/CaseStudiesComponent';
+import {NavigationService} from './common/navigation/NavigationService';
+import {NewsService} from './home/news/NewsService';
+import {DocsService} from './home/docs/DocsService';
 
 
 declare function $(element: any): any;
@@ -28,7 +31,7 @@ declare module Foundation {
 @Component({
     selector: 'ab-main',
     templateUrl: './app/MainComponent.html',
-    providers: [],
+    providers: [NavigationService, NewsService, DocsService],
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([

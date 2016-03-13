@@ -1,18 +1,25 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 import {NewsSummaryModel} from '../../common/model/NewsSummaryModel';
+import {NewsService} from './NewsService';
 
 @Component({
-    templateUrl: './app/home/news/NewsComponent.html'
+    templateUrl: './app/home/news/NewsComponent.html',
+    directives: [ROUTER_DIRECTIVES]
 })
-export class NewsComponent {
+export class NewsComponent implements OnInit {
 
     newsList: NewsSummaryModel[] = [];
 
-    constructor() {
-        this.newsList = [
-            {id: '1', title: 'test entry', summary: 'write something exciting here...', publishDate: new Date('2015-12-23')},
-            {id: '2', title: 'Galaxy S7 is released!', summary: 'write something exciting here...', publishDate: new Date('2016-03-11')},
-            {id: '3', title: 'Angular2 is in beta!', summary: 'write something exciting here...', publishDate: new Date('2016-01-23')}
-        ];
+    constructor (
+        private newsService: NewsService
+    ) {}
+
+    ngOnInit() {
+        this.newsService.getAll().subscribe(
+            result => this.newsList = result,
+            error => console.log(error),
+            () => console.log('done retrieving news list.')
+        );
     }
 }

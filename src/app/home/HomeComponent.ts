@@ -2,6 +2,7 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {AboutComponent} from './about/AboutComponent';
 import {NewsComponent} from './news/NewsComponent';
+import {NewsDetailsComponent} from './news/NewsDetailsComponent';
 import {SupportComponent} from './support/SupportComponent';
 import {ContactComponent} from './contact/ContactComponent';
 import {DocsComponent} from './docs/DocsComponent';
@@ -13,6 +14,7 @@ import {LinkDataModel} from '../common/model/LinkDataModel';
 })
 @RouteConfig([
     {path:'/news', name:'News', component: NewsComponent, useAsDefault: true},
+    {path: '/news/:id', name: 'NewsDetails', component: NewsDetailsComponent},
     {path:'/support', name:'Support', component: SupportComponent},
     {path:'/docs', name:'Docs', component: DocsComponent},
     {path:'/contact', name:'Contact', component: ContactComponent},
