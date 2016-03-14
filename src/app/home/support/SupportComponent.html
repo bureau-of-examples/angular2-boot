@@ -1,0 +1,14 @@
+<div class="row collapse ab-vertical-tabs">
+    <div class="medium-4 large-3 columns">
+        <ul class="tabs vertical">
+            <li class="tabs-title"><a [routerLink]="['ProductType']" [attr.aria-selected]="supportTabService.getSelectedTab() == 'ProductType'">Product Type</a></li>
+            <li class="tabs-title"><a [routerLink]="['FieldsetDefinition']" [attr.aria-selected]="supportTabService.getSelectedTab() == 'FieldsetDefinition'">Fieldset definition</a></li>
+        </ul>
+    </div>
+    <div class="medium-8 large-9 columns">
+        <div class="tabs-content vertical">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

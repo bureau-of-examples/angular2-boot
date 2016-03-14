@@ -105,6 +105,10 @@ p {
   }
 }
 
+.ab-vertical-tabs>.columns>.vertical {
+    min-height: 10em;
+}
+
 article.ab-content {
   background-color: #fefefe;
   margin: 0 1px;
