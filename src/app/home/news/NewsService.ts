@@ -32,7 +32,7 @@ export class NewsService {
     get(id: string): Observable<NewsDetailsModel> {
         for(var i: number = 0; i < this.mockNewsList.length; i++) {
             var item: NewsDetailsModel = this.mockNewsList[i];
-            if(item.id === id) {
+            if(item.id === '' + id) {
                 return Observable.fromArray([item]);
             }
         }

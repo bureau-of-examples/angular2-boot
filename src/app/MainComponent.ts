@@ -16,10 +16,10 @@ import {HeaderComponent}    from './HeaderComponent';
 import {HomeComponent}      from './home/HomeComponent';
 import {ProductsComponent}  from './products/ProductsComponent';
 import {CaseStudiesComponent}   from './case-studies/CaseStudiesComponent';
-import {NavigationService} from './common/navigation/NavigationService';
-import {NewsService} from './home/news/NewsService';
-import {DocsService} from './home/docs/DocsService';
-
+import {NavigationService}  from './common/navigation/NavigationService';
+import {NewsService}        from './home/news/NewsService';
+import {DocsService}        from './home/docs/DocsService';
+import {NewsDetailsComponent} from './home/news/NewsDetailsComponent';
 
 declare function $(element: any): any;
 declare module Foundation {
@@ -36,6 +36,7 @@ declare module Foundation {
 })
 @RouteConfig([
     {path:'/home/...', name: 'Home', component: HomeComponent, useAsDefault: true},
+    {path: '/article/:id', name: 'NewsDetails', component: NewsDetailsComponent},
     {path:'/products/...', name: 'Products', component: ProductsComponent},
     {path:'/case-studies/...', name: 'CaseStudies', component: CaseStudiesComponent}
 ])
@@ -46,7 +47,8 @@ export class MainComponent implements AfterViewInit {
 
     constructor(
         private location: Location,
-        private elementRef: ElementRef
+        private elementRef: ElementRef,
+        private navigationService: NavigationService
     ) {
         console.log('MainComponent.constructor');
     }
