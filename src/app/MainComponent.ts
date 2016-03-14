@@ -9,17 +9,20 @@ import {
         ROUTER_PROVIDERS,
         RouteConfig,
         ROUTER_DIRECTIVES,
-        Location
-}                            from 'angular2/router';
-import {bootstrap}          from 'angular2/platform/browser';
-import {HeaderComponent}    from './HeaderComponent';
-import {HomeComponent}      from './home/HomeComponent';
-import {ProductsComponent}  from './products/ProductsComponent';
+        Location,
+        Router,
+        Instruction
+}                               from 'angular2/router';
+import {bootstrap}              from 'angular2/platform/browser';
+import {HeaderComponent}        from './HeaderComponent';
+import {HomeComponent}          from './home/HomeComponent';
+import {ProductsComponent}      from './products/ProductsComponent';
 import {CaseStudiesComponent}   from './case-studies/CaseStudiesComponent';
-import {NavigationService}  from './common/navigation/NavigationService';
-import {NewsService}        from './home/news/NewsService';
-import {DocsService}        from './home/docs/DocsService';
-import {NewsDetailsComponent} from './home/news/NewsDetailsComponent';
+import {NavigationService}      from './common/navigation/NavigationService';
+import {NewsService}            from './home/news/NewsService';
+import {DocsService}            from './home/docs/DocsService';
+import {NewsDetailsComponent}   from './home/news/NewsDetailsComponent';
+import {RouterLinkModel}        from './common/model/RouterLinkModel';
 
 declare function $(element: any): any;
 declare module Foundation {
@@ -27,6 +30,7 @@ declare module Foundation {
         constructor(elem : any);
     }
 }
+
 
 @Component({
     selector: 'ab-main',
@@ -47,6 +51,7 @@ export class MainComponent implements AfterViewInit {
 
     constructor(
         private location: Location,
+        private router: Router,
         private elementRef: ElementRef,
         private navigationService: NavigationService
     ) {
@@ -54,8 +59,7 @@ export class MainComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        //console.log(this.elementRef.nativeElement);
-        //new Foundation.Tabs($(this.elementRef.nativeElement).find('.tabs'));
+        //placeholder
     }
 
     incrementCounter():void {
@@ -64,6 +68,21 @@ export class MainComponent implements AfterViewInit {
 
     pathStartWith(portion : string): boolean {
         return this.location.path().startsWith(portion);
+    }
+
+    closeTab($event: any, item: RouterLinkModel): void {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        console.log('closing tab:');
+        console.log(item.routerLink);
+
+        var thisRoute: Instruction = this.router.generate(item.routerLink);
+        if(this.router.isRouteActive(thisRoute)) {
+            console.log('tab is active, go back to previous route');
+            this.location.back();
+        }
+        this.navigationService.closeTab(item);
     }
 }
 

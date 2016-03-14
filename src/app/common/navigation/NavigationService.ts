@@ -7,15 +7,38 @@ export class NavigationService {
     tabLinks: RouterLinkModel[] = [];
 
     constructor() {
-        this.tabLinks = [
-            {text: 'News Details 1', routerLink: ['NewsDetails', {id: 1}]},
-            {text: 'News Details 2', routerLink: ['NewsDetails', {id: 2}]},
-            {text: 'News Details 3', routerLink: ['NewsDetails', {id: 3}]}
-        ];
+        this.tabLinks = [];
     }
 
     getTabLinks() : RouterLinkModel[] {
         return this.tabLinks;
     }
 
+    closeTab(item: RouterLinkModel): void {
+        for(var i: number = 0; i< this.tabLinks.length; i++) {
+            if(this.tabLinks[i] === item) {
+                this.tabLinks.splice(i, 1);
+            }
+        }
+    }
+
+    addTab(text: string, routerLink: any[]): void {
+
+        var newLinkJson: string = JSON.stringify(routerLink);
+
+        for(var i: number = 0; i< this.tabLinks.length; i++) {
+            var item: RouterLinkModel = this.tabLinks[i];
+            var linkJson: string = JSON.stringify(item.routerLink);
+            if(linkJson === newLinkJson) { //do not add again if already added
+
+                if(item.text !== text) {
+                    item.text = text;
+                }
+                return;
+            }
+        }
+
+        this.tabLinks.push({text: text, routerLink: routerLink});
+
+    }
 }

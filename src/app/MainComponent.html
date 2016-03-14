@@ -7,7 +7,11 @@
         <li class="tabs-title"><a [routerLink]="['Home']" [attr.aria-selected]="pathStartWith('/home')">Home</a></li>
         <li class="tabs-title"><a [routerLink]="['Products']" [attr.aria-selected]="pathStartWith('/products')">Products</a></li>
         <li class="tabs-title" *ngFor="#item of navigationService.getTabLinks()">
-            <a [routerLink]="item.routerLink" [attr.aria-selected]="pathStartWith('/article/' + item.routerLink[1].id)">{{item.text}}</a>
+            <a [routerLink]="item.routerLink" [attr.aria-selected]="pathStartWith('/article/' + item.routerLink[1].id)">
+                {{item.text}}
+                <a class="ab-close-button" (click)="closeTab($event, item)">&times;</a>
+            </a>
+
         </li>
         <li class="tabs-title"><a [routerLink]="['CaseStudies']" [attr.aria-selected]="pathStartWith('/case-studies')">Case Studies</a></li>
     </ul>

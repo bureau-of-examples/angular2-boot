@@ -4,7 +4,7 @@ import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {SearchComponent as PhoneSearchComponent} from './phone/SearchComponent';
 import {SearchComponent as OfferSearchComponent} from './offer/SearchComponent';
 import {SearchComponent as ComputerSearchComponent} from './computer/SearchComponent';
-
+import {RouteDestinationComponent} from '../common/navigation/RouteDestinationComponent';
 
 @Component({
     templateUrl: './app/products/ProductsComponent.html',
@@ -15,5 +15,5 @@ import {SearchComponent as ComputerSearchComponent} from './computer/SearchCompo
     {path: '/offer', name: 'OfferSearch', component: OfferSearchComponent, useAsDefault: true},
     {path: '/computer', name: 'ComputerSearch', component: ComputerSearchComponent}
 ])
-export class ProductsComponent {
+export class ProductsComponent extends RouteDestinationComponent {
 }

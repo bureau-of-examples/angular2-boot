@@ -6,6 +6,7 @@ import {SupportComponent} from './support/SupportComponent';
 import {ContactComponent} from './contact/ContactComponent';
 import {DocsComponent} from './docs/DocsComponent';
 import {LinkDataModel} from '../common/model/LinkDataModel';
+import {RouteDestinationComponent} from '../common/navigation/RouteDestinationComponent';
 
 @Component({
     templateUrl: './app/home/HomeComponent.html',
@@ -18,11 +19,13 @@ import {LinkDataModel} from '../common/model/LinkDataModel';
     {path:'/contact', name:'Contact', component: ContactComponent},
     {path:'/about', name:'About', component: AboutComponent}
 ])
-export class HomeComponent {
+export class HomeComponent extends RouteDestinationComponent {
 
     navLinks: LinkDataModel[] = [];
 
     constructor() {
+        super();
+
         this.navLinks = [
             {text: 'News', routeName: 'News'},
             {text: 'Docs', routeName: 'Docs'},
