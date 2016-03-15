@@ -22,7 +22,7 @@ export class NavigationService {
         }
     }
 
-    addTab(text: string, routerLink: any[]): void {
+    addTab(text: string, routerLink: any[]): RouterLinkModel {
 
         var newLinkJson: string = JSON.stringify(routerLink);
 
@@ -34,11 +34,13 @@ export class NavigationService {
                 if(item.text !== text) {
                     item.text = text;
                 }
-                return;
+                return item;
             }
         }
 
-        this.tabLinks.push({text: text, routerLink: routerLink});
+        var newRouterLink: RouterLinkModel = {text: text, routerLink: routerLink};
+        this.tabLinks.push(newRouterLink);
+        return newRouterLink;
 
     }
 }

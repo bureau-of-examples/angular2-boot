@@ -10,6 +10,8 @@ export class ProductTypeService {
         {id: '2', name: 'Computer', description: 'Laptop, desktop, 2-in-1 and all-in-one'}
     ];
 
+    private nextProductTypeId: number = 3;
+
     getAll(): Observable<ProductTypeModel[]> {
         return Observable.interval(500).take(1).map(index => this.mockProductTypeList);
     }
@@ -23,5 +25,10 @@ export class ProductTypeService {
         return Observable.interval(500).take(1).map(index => 'success');
     }
 
+    add(editedProductType:ProductTypeModel): Observable<string> {
+        editedProductType.id = '' + this.nextProductTypeId++;
+        this.mockProductTypeList.push(editedProductType);
+        return Observable.interval(500).take(1).map(index => 'success');
+    }
 }
 

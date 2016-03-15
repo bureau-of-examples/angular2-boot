@@ -3,6 +3,8 @@
         <ul class="tabs vertical" style="border-right:0">
             <li class="tabs-title"><a [routerLink]="['ProductType']" [attr.aria-selected]="supportTabService.getSelectedTab() == 'ProductType'">Product Type</a></li>
             <li class="tabs-title"><a [routerLink]="['FieldsetDefinition']" [attr.aria-selected]="supportTabService.getSelectedTab() == 'FieldsetDefinition'">Fieldset definition</a></li>
+            <li *ngFor="#item of supportTabService.getTabLinks()" class="tabs-title">
+                <a [routerLink]="item.routerLink" [attr.aria-selected]="supportTabService.getSelectedTab() == item.text">{{item.text}}</a></li>
         </ul>
     </div>
     <div class="medium-8 large-9 columns">

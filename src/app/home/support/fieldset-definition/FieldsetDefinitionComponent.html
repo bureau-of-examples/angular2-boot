@@ -1,3 +1,11 @@
 <div class="ab-vertical-content">
-    fieldset definition!
+    <div class="">
+        <h2>Fieldset Definition</h2>
+        <ul class="ab-list">
+            <li *ngFor="#item of fieldsets">
+                <a [routerLink]="['FieldsetEditor', {id: item.id}]">{{item.name}}</a></li>
+        </ul>
+
+    </div>
+
 </div>

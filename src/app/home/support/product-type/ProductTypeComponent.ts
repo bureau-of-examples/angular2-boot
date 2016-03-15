@@ -10,24 +10,20 @@ import {ProductTypeModel} from '../../../common/model/ProductTypeModel';
 @Component({
     templateUrl: './app/home/support/product-type/ProductTypeComponent.html'
 })
-export class ProductTypeComponent extends NestedViewComponent implements AfterViewInit{
+export class ProductTypeComponent extends NestedViewComponent implements AfterViewInit {
 
-    editor: any;
-    editedProductType: ProductTypeModel = {id: '', name: '', description: ''};
-    productTypeList: ProductTypeModel[];
+    editor:any;
+    editedProductType:ProductTypeModel = {id: '', name: '', description: ''};
+    productTypeList:ProductTypeModel[];
 
-    constructor(
-        private supportTabService:SupportTabService,
-        private productTypeService: ProductTypeService
-    ) {
+    constructor(private supportTabService:SupportTabService,
+                private productTypeService:ProductTypeService) {
         super();
         this.refresh();
     }
 
     refresh() {
-        this.productTypeService.getAll().subscribe(
-            result => this.productTypeList = result
-        )
+        this.productTypeService.getAll().subscribe(result => this.productTypeList = result);
     }
 
     routerOnActivate(nextInstruction:ComponentInstruction, prevInstruction:ComponentInstruction):any {
@@ -40,24 +36,27 @@ export class ProductTypeComponent extends NestedViewComponent implements AfterVi
         return undefined;
     }
 
-    editProductType(id: string) {
+    editProductType(id:string) {
         console.log('opening product type editor for id: ' + id);
-        for(var i: number = 0; i<this.productTypeList.length; i++) {
-            var item: ProductTypeModel = this.productTypeList[i];
-            if(item.id === id) {
+        for (var i:number = 0; i < this.productTypeList.length; i++) {
+            var item:ProductTypeModel = this.productTypeList[i];
+            if (item.id === id) {
                 this.editedProductType = item;
                 this.editor.open();
             }
         }
     }
 
-    deleteProductType(id: string): void {
+    deleteProductType(id:string):void {
         console.log('deleting product type: ' + id);
         this.productTypeService.delete(id).subscribe(x => this.refresh());
     }
 
     createProductType() {
         console.log('creating new product type');
-        //this.editedProductType  = {id: '', name: '', description: ''};
+
+        this.editedProductType  = {id: '', name: '', description: ''};
+        this.productTypeService.add(this.editedProductType).subscribe(x => this.refresh());
+        this.editor.open();
     }
 }

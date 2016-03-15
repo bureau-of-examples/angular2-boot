@@ -127,6 +127,14 @@ article.ab-content {
   padding: 2em;
 }
 
+.ab-list {
+  list-style-type: none;
+
+  a:hover {
+    color:gold;
+  }
+}
+
 .router-link-active {
   @extend .is-active;
   font-weight: bold;

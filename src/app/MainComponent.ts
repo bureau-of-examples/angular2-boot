@@ -1,10 +1,8 @@
-///<reference path="../../typings/browser.d.ts" />
 ///<reference path="./ambient/foundation.d.ts" />
 
 import {
         Component,
-        AfterViewInit,
-        ElementRef
+        AfterViewInit
 }                           from 'angular2/core';
 import {
         ROUTER_PROVIDERS,
@@ -24,12 +22,13 @@ import {NewsService}            from './home/news/NewsService';
 import {DocsService}            from './home/docs/DocsService';
 import {NewsDetailsComponent}   from './home/news/NewsDetailsComponent';
 import {RouterLinkModel}        from './common/model/RouterLinkModel';
-import {ProductTypeService} from './products/services/ProductTypeService';
+import {ProductTypeService}     from './products/services/ProductTypeService';
+import {FieldsetService}        from './services/FieldsetService';
 
 @Component({
     selector: 'ab-main',
     templateUrl: './app/MainComponent.html',
-    providers: [NavigationService, NewsService, DocsService, ProductTypeService],
+    providers: [NavigationService, NewsService, DocsService, ProductTypeService, FieldsetService],
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([
@@ -46,7 +45,6 @@ export class MainComponent implements AfterViewInit {
     constructor(
         private location: Location,
         private router: Router,
-        private elementRef: ElementRef,
         private navigationService: NavigationService
     ) {
         console.log('MainComponent.constructor');
@@ -54,10 +52,6 @@ export class MainComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         //placeholder
-    }
-
-    incrementCounter():void {
-        this.counter++;
     }
 
     pathStartWith(portion : string): boolean {
