@@ -1,4 +1,5 @@
 ///<reference path="../../typings/browser.d.ts" />
+///<reference path="./ambient/foundation.d.ts" />
 
 import {
         Component,
@@ -23,19 +24,12 @@ import {NewsService}            from './home/news/NewsService';
 import {DocsService}            from './home/docs/DocsService';
 import {NewsDetailsComponent}   from './home/news/NewsDetailsComponent';
 import {RouterLinkModel}        from './common/model/RouterLinkModel';
-
-declare function $(element: any): any;
-declare module Foundation {
-    export class Tabs {
-        constructor(elem : any);
-    }
-}
-
+import {ProductTypeService} from './products/services/ProductTypeService';
 
 @Component({
     selector: 'ab-main',
     templateUrl: './app/MainComponent.html',
-    providers: [NavigationService, NewsService, DocsService],
+    providers: [NavigationService, NewsService, DocsService, ProductTypeService],
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([

@@ -2,7 +2,6 @@ import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES} from 'angular2/router';
 import {ProductTypeComponent} from './product-type/ProductTypeComponent';
 import {FieldsetDefinitionComponent} from './fieldset-definition/FieldsetDefinitionComponent';
-import {NestedViewComponent} from '../../common/navigation/NestedViewComponent';
 import {SupportTabService} from './SupportTabService';
 
 @Component({
@@ -16,7 +15,8 @@ import {SupportTabService} from './SupportTabService';
 ])
 export class SupportComponent {
 
-    constructor(private supportTabService: SupportTabService) {
-    }
+    constructor(
+        private supportTabService: SupportTabService
+    ) {}
 
 }

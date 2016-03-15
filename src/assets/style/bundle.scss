@@ -106,7 +106,19 @@ p {
 }
 
 .ab-vertical-tabs>.columns>.vertical {
-    min-height: 10em;
+  min-height: 10em;
+}
+
+.ab-vertical-content {
+  padding: 1em;
+  background-color: #e6e6e6;
+  min-height: 10em;
+
+  table {
+    caption {
+      margin-top: 0;
+    }
+  }
 }
 
 article.ab-content {

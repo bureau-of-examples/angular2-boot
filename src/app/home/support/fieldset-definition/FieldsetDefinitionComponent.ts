@@ -4,11 +4,12 @@ import {NestedViewComponent} from '../../../common/navigation/NestedViewComponen
 import {SupportTabService} from '../SupportTabService';
 
 @Component({
-    template: 'fieldset definition'
+    templateUrl: './app/home/support/fieldset-definition/FieldsetDefinitionComponent.html'
 })
 export class FieldsetDefinitionComponent extends NestedViewComponent {
 
     constructor(private supportTabService:SupportTabService) {
+        super();
     }
 
     routerOnActivate(nextInstruction:ComponentInstruction, prevInstruction:ComponentInstruction):any {
