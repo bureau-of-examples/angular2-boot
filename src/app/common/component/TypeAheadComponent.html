@@ -1,0 +1,6 @@
+<div style="position: relative">
+    <input type="text" [(ngModel)]="text" (keyup)="valueChange($event)">
+    <ul style="position: absolute" >
+        <li *ngFor="#item of result" (click)="itemClick(item)" >{{item}}</li>
+    </ul>
+</div>

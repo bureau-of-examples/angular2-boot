@@ -27,6 +27,18 @@ export class FieldsetService {
         });
     }
 
+    search(keywords: string): Observable<Fieldset[]> {
+
+        var result: Fieldset[] = [];
+        for(var i: number = 0; i<this.mockFieldsets.length; i++) {
+            var item: Fieldset = this.mockFieldsets[i];
+            if(item.name.indexOf(keywords) >= 0) {
+                result.push(item);
+            }
+        }
+        return Observable.interval(500).take(1).map(index => result);
+    }
+
     private populateMockFieldsets() {
         var phoneFieldset: Fieldset = new Fieldset('Smart Phone Fields');
         phoneFieldset.id = '1';
@@ -51,6 +63,8 @@ export class FieldsetService {
         phonePrice.children.push(new FieldSlot(hasStock));
         this.mockFieldsets.push(phonePrices);
     }
+
+
 
 
 }

@@ -19,7 +19,8 @@ export class DataField extends Field {
     constructor(name: string, dataType?: FieldDataType) {
         super(name);
 
-        this.dataType = dataType;
+        if(dataType)
+            this.dataType = dataType;
     }
 
 }
@@ -38,6 +39,10 @@ export class FieldSlot {
 export class Fieldset extends Field {
 
     children: FieldSlot[] = [];
+
+    toString() {
+        return this.name;
+    }
 }
 
 

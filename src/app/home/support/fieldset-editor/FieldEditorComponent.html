@@ -1,8 +1,33 @@
-<div [ngSwitch]="isDataField">
+<div class="callout" [ngSwitch]="isDataField">
+    <div>
+        <label>
+            Select Fieldset <input type="checkbox" [checked]="!isDataField" (click)="toggleView($event)">
+        </label>
+    </div>
+
     <div *ngSwitchWhen="true">
-        edit data field
+
+        <div>
+            <label>Field Name
+                <input type="text" [(ngModel)]="fieldSlot.field.name"></label>
+        </div>
+
+        <div>
+            <label>Field Data Type
+                <select #dataTypeSelect [ngModel]="'' + fieldSlot.field.dataType" (change)="setDataType(fieldSlot.field, dataTypeSelect.value)">
+                    <option *ngFor="#item of dataTypeOptions" value="{{item.value}}">{{item.key}}</option>
+                </select>
+            </label>
+        </div>
+
     </div>
     <div *ngSwitchWhen="false">
-        select fieldset
+        <div>
+            <label>
+                Fieldset
+                <ab-type-ahead (query)="searchFieldsets($event)" (change)="fieldsetChanged($event)"></ab-type-ahead>
+            </label>
+        </div>
+
     </div>
 </div>
