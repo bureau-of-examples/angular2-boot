@@ -1,3 +1,37 @@
 <div class="ab-vertical-content">
-    Fieldset editor {{id}}!
+    <h1>Edit fieldset {{id}}</h1>
+    <form *ngIf="fieldset">
+        <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" [(ngModel)]="fieldset.name">
+        </div>
+
+        <ul>
+            <li *ngFor="#item of fieldset.children" class="callout">
+                <fieldset>
+                    <div>
+                        <label for="required">Required</label>
+                        <input id="required" type="text" [(ngModel)]="item.required">
+                    </div>
+                    <div>
+                        <label for="minCount" >Min Count</label>
+                        <input id="minCount" type="text" [(ngModel)]="item.minCount">
+                    </div>
+                    <div>
+                        <label for="maxCount" >Max Count</label>
+                        <input id="maxCount" type="text" [(ngModel)]="item.maxCount">
+                    </div>
+                    <div>
+                        <ab-field-editor [fieldSlot]="item"></ab-field-editor>
+                    </div>
+                    <div>
+                        <button class="button warning" (click)="removeSlot(item)" >Remove</button>
+                    </div>
+                </fieldset>
+            </li>
+        </ul>
+
+        <button class="button" (click)="addSlot()">Add</button>
+
+    </form>
 </div>

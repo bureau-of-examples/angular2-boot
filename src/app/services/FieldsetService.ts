@@ -15,6 +15,18 @@ export class FieldsetService {
         return Observable.interval(500).take(1).map(index => this.mockFieldsets);
     }
 
+    getOne(id: string): Observable<Fieldset> {
+        return Observable.interval(500).take(1).map(index => {
+            for(var i: number = 0; i < this.mockFieldsets.length; i++) {
+                var item: Fieldset = this.mockFieldsets[i];
+                if(item.id === id) {
+                    return item;
+                }
+            }
+            return null;
+        });
+    }
+
     private populateMockFieldsets() {
         var phoneFieldset: Fieldset = new Fieldset('Smart Phone Fields');
         phoneFieldset.id = '1';

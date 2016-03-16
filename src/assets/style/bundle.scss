@@ -140,4 +140,9 @@ article.ab-content {
   font-weight: bold;
 }
 
+li.callout {
+  list-style-type: none;
+  padding-left: 2em;
+}
+
 @import "../../../node_modules/font-awesome/scss/font-awesome";

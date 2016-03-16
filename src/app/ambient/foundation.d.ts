@@ -1,5 +1,5 @@
 
-declare function $(element:any):any;
+declare function jQuery(element:any):any;
 
 declare module Foundation {
     export class Tabs {

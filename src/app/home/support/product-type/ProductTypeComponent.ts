@@ -32,7 +32,7 @@ export class ProductTypeComponent extends NestedViewComponent implements AfterVi
     }
 
     ngAfterViewInit():any {
-        this.editor = new Foundation.Reveal($('#productTypeEditor'));
+        this.editor = new Foundation.Reveal(jQuery('#productTypeEditor'));
         return undefined;
     }
 
