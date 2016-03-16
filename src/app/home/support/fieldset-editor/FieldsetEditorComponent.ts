@@ -3,8 +3,7 @@ import {RouteParams, OnActivate, ComponentInstruction, OnDeactivate} from 'angul
 import {SupportTabService} from '../SupportTabService';
 import {RouterLinkModel} from '../../../common/model/RouterLinkModel';
 import {FieldsetService} from '../../../services/FieldsetService';
-import {Fieldset} from '../../../common/model/Fieldset';
-import {FieldSlot} from "../../../common/model/Fieldset";
+import {Fieldset, FieldSlot} from '../../../common/model/Fieldset';
 import {FieldEditorComponent} from './FieldEditorComponent';
 
 @Component({
@@ -13,14 +12,13 @@ import {FieldEditorComponent} from './FieldEditorComponent';
 })
 export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
 
-    private id: string;
-    private fieldset: Fieldset;
+    private id:string;
+    private fieldset:Fieldset;
     private link:RouterLinkModel;
 
     constructor(private routeParams:RouteParams,
                 private supportTabService:SupportTabService,
-                private fieldsetService: FieldsetService
-    ) {
+                private fieldsetService:FieldsetService) {
         this.id = this.routeParams.get('id');
         this.fieldsetService.getOne(this.id).subscribe(result => this.fieldset = result);
         console.log('editing fieldset ' + this.id);
@@ -40,23 +38,24 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
         return undefined;
     }
 
-    addSlot(): void {
+    addSlot():void {
 
-        if(this.fieldset == null)
+        if (this.fieldset === null)
             return;
 
-        var slot: FieldSlot = new FieldSlot(null);
+        var slot:FieldSlot = new FieldSlot(null);
         this.fieldset.children.push(slot);
     }
 
-    removeSlot(item: FieldSlot): void {
+    removeSlot(item:FieldSlot):void {
 
-        var index: number = this.fieldset.children.indexOf(item);
-        if(index >= 0) {
+        var index:number = this.fieldset.children.indexOf(item);
+        if (index >= 0) {
             this.fieldset.children.splice(index, 1);
         }
     }
 
 }
+
 
 
