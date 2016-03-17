@@ -12,7 +12,12 @@ var config = {
     ],
     foundationSitesLibs: [
         'node_modules/jquery/dist/jquery.js',
-        'node_modules/foundation-sites/dist/foundation.js'
+        'node_modules/foundation-sites/dist/foundation.js',
+        'node_modules/jsog/lib/JSOG.js'
+    ],
+    jsMaps: [
+        'node_modules/systemjs/dist/system-polyfills.js.map',
+        'node_modules/es6-shim/es6-shim.map'
     ],
     fontAwesomeFonts: 'node_modules/font-awesome/fonts/*.*',
     srcLibsFolder: './src/libs',

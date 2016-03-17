@@ -10,3 +10,14 @@ declare module Foundation {
         constructor(elem:any, options?:any);
     }
 }
+
+declare module JSOG {
+
+    export function stringify(obj: any): string;
+
+    export function parse(str: string): any;
+
+    export function encode(obj: any): any;
+
+    export function decode(obj: any): any;
+}

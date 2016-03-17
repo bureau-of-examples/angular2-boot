@@ -1,35 +1,36 @@
 <div class="ab-vertical-content">
-    <div class="row">
-        <div class="medium-12 columns">
-            <table class="hover">
-                <caption>Product Type</caption>
-                <thead>
-                <tr>
-                    <th style="width: 20%">Name</th>
-                    <th style="width: 70%">Description</th>
-                    <th style="width: 10%">
-                        <button class="button" (click)="createProductType()" >Create</button>
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="#item of productTypeList">
-                    <td><a (click)="editProductType(item.id)">{{item.name}}</a></td>
-                    <td>{{item.description}}</td>
-                    <td><button (click)="deleteProductType(item.id)" class="button warning">Delete</button></td>
-                </tr>
-                </tbody>
-                <tfoot>
-                <tr>
-                    <td class="text-center" colspan="3" style="font-weight: lighter; font-size: 0.8em; color: #bbb;">?
-                        of ? record(s)
-                    </td>
-                </tr>
-                </tfoot>
-            </table>
 
-        </div>
-    </div>
+    <h2>Product Type</h2>
+    <p *ngIf="!loaded">Loading...</p>
+
+    <table *ngIf="loaded" class="hover">
+        <thead>
+        <tr>
+            <th style="width: 20%">Name</th>
+            <th style="width: 70%">Description</th>
+            <th style="width: 10%">
+                <button class="button" (click)="createProductType()">Create</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="#item of productTypeList">
+            <td><a (click)="editProductType(item.id)">{{item.name}}</a></td>
+            <td>{{item.description}}</td>
+            <td>
+                <button (click)="deleteProductType(item.id)" class="button warning">Delete</button>
+            </td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td class="text-center" colspan="3" style="font-weight: lighter; font-size: 0.8em; color: #bbb;">?
+                of ? record(s)
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+
 
     <div class="reveal" id="productTypeEditor" data-reveal data-close-on-click="false">
         <h1>Edit Product Type {{editedProductType?.id}}</h1>

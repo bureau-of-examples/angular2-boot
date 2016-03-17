@@ -27,7 +27,7 @@ gulp.task('clean-srcLibs', [], function(done){
 
 gulp.task('copy-to-srcLibs', ['clean-srcLibs'], function(){
     return gulp
-        .src(config.jsLibs, {base: 'node_modules'})
+        .src(config.jsLibs.concat(config.jsMaps), {base: 'node_modules'})
         .pipe(gulp.dest(config.srcLibsFolder));
 });
 

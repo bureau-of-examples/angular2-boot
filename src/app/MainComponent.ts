@@ -24,11 +24,13 @@ import {NewsDetailsComponent}   from './home/news/NewsDetailsComponent';
 import {RouterLinkModel}        from './common/model/RouterLinkModel';
 import {ProductTypeService}     from './products/services/ProductTypeService';
 import {FieldsetService}        from './services/FieldsetService';
+import {DataService}                       from './services/DataService';
+
 
 @Component({
     selector: 'ab-main',
     templateUrl: './app/MainComponent.html',
-    providers: [NavigationService, NewsService, DocsService, ProductTypeService, FieldsetService],
+    providers: [NavigationService, NewsService, DocsService, ProductTypeService, FieldsetService, DataService],
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([

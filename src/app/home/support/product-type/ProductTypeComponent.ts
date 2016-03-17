@@ -15,6 +15,7 @@ export class ProductTypeComponent extends NestedViewComponent implements AfterVi
     editor:any;
     editedProductType:ProductTypeModel = {id: '', name: '', description: ''};
     productTypeList:ProductTypeModel[];
+    private loaded: boolean = false;
 
     constructor(private supportTabService:SupportTabService,
                 private productTypeService:ProductTypeService) {
@@ -23,7 +24,10 @@ export class ProductTypeComponent extends NestedViewComponent implements AfterVi
     }
 
     refresh() {
-        this.productTypeService.getAll().subscribe(result => this.productTypeList = result);
+        this.productTypeService.getAll().subscribe(result => {
+            this.productTypeList = result;
+            this.loaded = true;
+        });
     }
 
     routerOnActivate(nextInstruction:ComponentInstruction, prevInstruction:ComponentInstruction):any {

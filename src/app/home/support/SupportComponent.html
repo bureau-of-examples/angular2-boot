@@ -1,6 +1,6 @@
 <div class="row collapse ab-vertical-tabs">
     <div class="medium-4 large-3 columns">
-        <ul class="tabs vertical" style="border-right:0">
+        <ul class="tabs vertical ab-side-nav" >
             <li class="tabs-title"><a [routerLink]="['ProductType']" [attr.aria-selected]="supportTabService.getSelectedTab() == 'ProductType'">Product Type</a></li>
             <li class="tabs-title"><a [routerLink]="['FieldsetDefinition']" [attr.aria-selected]="supportTabService.getSelectedTab() == 'FieldsetDefinition'">Fieldset definition</a></li>
             <li *ngFor="#item of supportTabService.getTabLinks()" class="tabs-title">

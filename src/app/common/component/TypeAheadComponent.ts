@@ -11,14 +11,8 @@ export interface QueryCallback {
     templateUrl: './app/common/component/TypeAheadComponent.html'
 })
 export class TypeAheadComponent implements OnInit, QueryCallback {
-    ngOnInit():any {
-        if(this.currentItem) {
-            this.text = this.currentItem.toString();
-        }
-        return undefined;
-    }
 
-    static QUERY_DELAY:number = 500;
+    private static QUERY_DELAY:number = 500;
 
     @Input() currentItem: any;
     @Output() itemChange:EventEmitter<any> = new EventEmitter();
@@ -29,6 +23,13 @@ export class TypeAheadComponent implements OnInit, QueryCallback {
     private pendingQuery:any;
 
     private result:any[] = [];
+
+    ngOnInit():any {
+        if(this.currentItem) {
+            this.text = this.currentItem.toString();
+        }
+        return undefined;
+    }
 
     getSearchKeywords():string {
         return this.text;

@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from 'angular2/core';
-import {FieldSlot, DataField} from '../../../common/model/Fieldset';
+import {FieldSlot, DataField, Fieldset} from '../../../common/model/Fieldset';
 import {SelectOPtionModel} from '../../../common/model/SelectOPtionModel';
 import {FieldsetService} from '../../../services/FieldsetService';
 import {TypeAheadComponent} from '../../../common/component/TypeAheadComponent';
-import {Fieldset} from "../../../common/model/Fieldset";
+
 
 @Component({
     selector: 'ab-field-editor',

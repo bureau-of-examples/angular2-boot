@@ -1,12 +1,11 @@
 <div class="ab-vertical-content">
-    <div class="">
-        <h2>Fieldset Definition</h2>
-        <p *ngIf="!loaded">Loading...</p>
-        <ul class="ab-list">
-            <li *ngFor="#item of fieldsets">
-                <a [routerLink]="['FieldsetEditor', {id: item.id}]">{{item.name}}</a></li>
-        </ul>
 
-    </div>
+    <h2>Fieldset Definition</h2>
+    <p *ngIf="!loaded">Loading...</p>
+    <ul class="ab-list">
+        <li *ngFor="#item of fieldsets">
+            <a [routerLink]="['FieldsetEditor', {id: item.id}]">{{item.name}}</a></li>
+    </ul>
+
 
 </div>

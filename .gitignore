@@ -11,3 +11,4 @@ npm-debug.log
 /src/assets/fonts/*
 bundle.css
 Fieldset.js
+AppState.js

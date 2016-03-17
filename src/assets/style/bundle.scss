@@ -154,6 +154,15 @@ li.callout {
   padding-left: 2em;
 }
 
+.ab-side-nav {
+  border-right:0;
+
+  li {
+    a {
+      font-size: 1em;
+    }
+  }
+}
 
 .ab-type-ahead-list {
   position: absolute;
