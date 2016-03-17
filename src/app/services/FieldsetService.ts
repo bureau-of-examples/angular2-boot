@@ -1,11 +1,13 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Rx';
 import {Fieldset, DataField, FieldSlot, FieldDataType} from '../common/model/Fieldset';
+import {SelectOPtionModel} from '../common/model/SelectOPtionModel';
 
 @Injectable()
 export class FieldsetService {
 
     private mockFieldsets: Fieldset[] = [];
+    private dataTypeOptions: SelectOPtionModel[] = null;
 
     constructor() {
         this.populateMockFieldsets();
@@ -39,6 +41,27 @@ export class FieldsetService {
         return Observable.interval(500).take(1).map(index => result);
     }
 
+    getFieldDataTypes(): SelectOPtionModel[] {
+        if(this.dataTypeOptions === null) {
+            var keys: string[] = this.getStringKeys(FieldDataType);
+            var result: SelectOPtionModel[] = [];
+            keys.forEach(key => {
+                result.push({key: key, value: '' + FieldDataType[key]});
+            });
+            console.log('select options: ', result);
+            this.dataTypeOptions = result;
+        }
+        return this.dataTypeOptions;
+    }
+
+    private getStringKeys(obj: any): string[] {
+        var names: string[] = [];
+        for(var n in obj) {
+            if(typeof obj[n] === 'number') names.push(n);
+        }
+        return names;
+    }
+
     private populateMockFieldsets() {
         var phoneFieldset: Fieldset = new Fieldset('Smart Phone Fields');
         phoneFieldset.id = '1';
@@ -63,8 +86,6 @@ export class FieldsetService {
         phonePrice.children.push(new FieldSlot(hasStock));
         this.mockFieldsets.push(phonePrices);
     }
-
-
 
 
 }

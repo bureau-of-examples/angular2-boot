@@ -13,6 +13,8 @@ export class FieldsetDefinitionComponent extends NestedViewComponent {
 
     private fieldsets: Fieldset[];
 
+    loaded: boolean = false;
+
     constructor(
         private supportTabService:SupportTabService,
         private fieldsetService: FieldsetService
@@ -28,6 +30,7 @@ export class FieldsetDefinitionComponent extends NestedViewComponent {
     }
 
     private refresh(): void {
-        this.fieldsetService.getAll().subscribe(result => this.fieldsets = result);
+        this.fieldsetService.getAll()
+            .subscribe(result => {this.fieldsets = result; this.loaded = true;});
     }
 }

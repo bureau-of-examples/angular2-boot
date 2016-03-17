@@ -1,4 +1,4 @@
-import {Output, EventEmitter, Component} from 'angular2/core';
+import {Input, Output, EventEmitter, Component, OnInit} from 'angular2/core';
 
 export interface QueryCallback {
 
@@ -10,11 +10,18 @@ export interface QueryCallback {
     selector: 'ab-type-ahead',
     templateUrl: './app/common/component/TypeAheadComponent.html'
 })
-export class TypeAheadComponent implements QueryCallback {
+export class TypeAheadComponent implements OnInit, QueryCallback {
+    ngOnInit():any {
+        if(this.currentItem) {
+            this.text = this.currentItem.toString();
+        }
+        return undefined;
+    }
 
     static QUERY_DELAY:number = 500;
 
-    @Output() change:EventEmitter<any> = new EventEmitter();
+    @Input() currentItem: any;
+    @Output() itemChange:EventEmitter<any> = new EventEmitter();
     @Output() query:EventEmitter<QueryCallback> = new EventEmitter();
 
     private text:string;
@@ -36,7 +43,8 @@ export class TypeAheadComponent implements QueryCallback {
     itemClick(item):void {
         this.result = [];
         this.text = item.toString();
-        this.change.emit(item);
+        this.currentItem = item;
+        this.itemChange.emit(item);
     }
 
     valueChange():void {

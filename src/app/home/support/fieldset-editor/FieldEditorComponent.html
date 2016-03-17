@@ -25,7 +25,7 @@
         <div>
             <label>
                 Fieldset
-                <ab-type-ahead (query)="searchFieldsets($event)" (change)="fieldsetChanged($event)"></ab-type-ahead>
+                <ab-type-ahead (query)="searchFieldsets($event)" (itemChange)="fieldsetChanged($event)" [currentItem]="getCurrentFieldset()"></ab-type-ahead>
             </label>
         </div>
 

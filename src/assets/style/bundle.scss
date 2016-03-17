@@ -128,10 +128,19 @@ article.ab-content {
 }
 
 .ab-list {
-  list-style-type: none;
+
+  margin-left: 0;
+
+  li {
+    list-style-type: none;
+    padding: 1em;
+    font-size: 1.2em;
+    background-color: #efefef;
+  }
 
   a:hover {
-    color:gold;
+    color:orangered;
+    font-weight: bolder;
   }
 }
 
@@ -145,4 +154,24 @@ li.callout {
   padding-left: 2em;
 }
 
+
+.ab-type-ahead-list {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  background-color: #fefefe;
+  margin: -1em 0 0 0;
+  border-left: 5px solid red;
+
+  li {
+    list-style-type: none;
+    padding: 0.5em;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #eee;
+      color: blue;
+    }
+  }
+}
 @import "../../../node_modules/font-awesome/scss/font-awesome";

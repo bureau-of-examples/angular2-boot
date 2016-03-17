@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from 'angular2/core';
-import {FieldSlot, DataField, FieldDataType} from '../../../common/model/Fieldset';
+import {FieldSlot, DataField} from '../../../common/model/Fieldset';
 import {SelectOPtionModel} from '../../../common/model/SelectOPtionModel';
 import {FieldsetService} from '../../../services/FieldsetService';
 import {TypeAheadComponent} from '../../../common/component/TypeAheadComponent';
+import {Fieldset} from "../../../common/model/Fieldset";
 
 @Component({
     selector: 'ab-field-editor',
@@ -29,8 +30,15 @@ export class FieldEditorComponent implements OnInit {
             this.isDataField = false;
         }
 
-        this.dataTypeOptions = this.getFieldDataTypes();
+        this.dataTypeOptions = this.fieldsetService.getFieldDataTypes();
         return undefined;
+    }
+
+    getCurrentFieldset(): any {
+        if(this.fieldSlot.field instanceof Fieldset) {
+            return this.fieldSlot.field;
+        }
+        return null;
     }
 
     toggleView($event): void {
@@ -43,6 +51,7 @@ export class FieldEditorComponent implements OnInit {
     }
 
     fieldsetChanged($event) {
+        console.log('selected fieldset: ', $event);
         this.fieldSlot.field = $event;
     }
 
@@ -51,23 +60,7 @@ export class FieldEditorComponent implements OnInit {
         field.dataType = parseInt(dataType);
     }
 
-    private getFieldDataTypes(): SelectOPtionModel[] {
-        var keys: string[] = this.getStringKeys(FieldDataType);
-        var result: SelectOPtionModel[] = [];
-        keys.forEach(key => {
-           result.push({key: key, value: '' + FieldDataType[key]});
-        });
-        console.log('select options: ', result);
-        return result;
-    }
 
-    private getStringKeys(obj: any): string[] {
-        var names: string[] = [];
-        for(var n in obj) {
-            if(typeof obj[n] === 'number') names.push(n);
-        }
-        return names;
-    }
 
 
 }
