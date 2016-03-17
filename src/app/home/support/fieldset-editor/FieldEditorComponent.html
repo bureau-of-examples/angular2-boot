@@ -1,7 +1,7 @@
-<div class="callout" [ngSwitch]="isDataField">
+<div class="callout" [ngSwitch]="fieldSlot.isDataField">
     <div>
         <label>
-            Select Fieldset <input type="checkbox" [checked]="!isDataField" (click)="toggleView($event)">
+            Select Fieldset <input type="checkbox" [checked]="!fieldSlot.isDataField" (click)="toggleView($event)">
         </label>
     </div>
 

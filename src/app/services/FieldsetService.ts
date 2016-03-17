@@ -41,4 +41,7 @@ export class FieldsetService {
     }
 
 
+    save(fieldset:Fieldset):void {
+        this.dataService.saveFieldset(fieldset);
+    }
 }

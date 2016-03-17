@@ -55,6 +55,10 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
         }
     }
 
+    save(): void {
+        this.fieldsetService.save(this.fieldset);
+    }
+
 }
 
 

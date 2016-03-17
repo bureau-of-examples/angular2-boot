@@ -27,13 +27,19 @@ export class DataField extends Field {
 
 export class FieldSlot {
 
-    constructor(public field: Field) {
+    constructor(public field?: Field) {
+        if(this.field) {
+            this.isDataField = this.field instanceof DataField;
+        } else {
+            this.isDataField = true;
+            this.field = new DataField('');
+        }
     }
 
     required: boolean = false;
     minCount: number = 1;
     maxCount: number = null;
-
+    isDataField: boolean;
 }
 
 export class Fieldset extends Field {

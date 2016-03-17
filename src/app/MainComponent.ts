@@ -11,7 +11,11 @@ import {
         Location,
         Router,
         Instruction
-}                               from 'angular2/router';
+}                                from 'angular2/router';
+import {
+        HTTP_PROVIDERS,
+        Http
+}                                from 'angular2/http';
 import {bootstrap}              from 'angular2/platform/browser';
 import {HeaderComponent}        from './HeaderComponent';
 import {HomeComponent}          from './home/HomeComponent';
@@ -30,7 +34,7 @@ import {DataService}                       from './services/DataService';
 @Component({
     selector: 'ab-main',
     templateUrl: './app/MainComponent.html',
-    providers: [NavigationService, NewsService, DocsService, ProductTypeService, FieldsetService, DataService],
+    providers: [NavigationService, NewsService, DocsService, ProductTypeService, FieldsetService, DataService, HTTP_PROVIDERS],
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([
@@ -47,7 +51,9 @@ export class MainComponent implements AfterViewInit {
     constructor(
         private location: Location,
         private router: Router,
-        private navigationService: NavigationService
+        private navigationService: NavigationService,
+        private http: Http,
+        private dataService: DataService
     ) {
         console.log('MainComponent.constructor');
     }
@@ -73,6 +79,17 @@ export class MainComponent implements AfterViewInit {
             this.location.back();
         }
         this.navigationService.closeTab(item);
+    }
+
+    test(): void {
+        this.http
+            .get('/app/json/test.json')
+            .map(res => <RouterLinkModel>res.json())
+            .subscribe(result => console.log(result));
+    }
+
+    clear(): void {
+        this.dataService.resetState();
     }
 }
 

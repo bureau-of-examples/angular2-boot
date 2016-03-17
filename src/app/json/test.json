@@ -1,0 +1,4 @@
+{
+  "text": "test",
+  "routerLink": ["routeName", {"id": "111"}]
+}

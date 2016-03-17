@@ -88,4 +88,15 @@ export class DataService {
         });
     }
 
+    saveFieldset(fieldset:Fieldset):void {
+        var fieldsets:Fieldset[] = this.state.fieldsets;
+        for(var i: number=0; i<fieldsets.length; i++) {
+            var item:Fieldset = fieldsets[i];
+            if(item.id === fieldset.id) {
+                fieldsets[i] = fieldset;
+                console.log('saved ', fieldset);
+                break;
+            }
+        }
+    }
 }

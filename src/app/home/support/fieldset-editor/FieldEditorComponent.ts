@@ -13,7 +13,6 @@ import {TypeAheadComponent} from '../../../common/component/TypeAheadComponent';
 export class FieldEditorComponent implements OnInit {
 
     @Input() fieldSlot:FieldSlot;
-    private isDataField:boolean;
     private dataTypeOptions: SelectOPtionModel[];
 
     constructor(private fieldsetService: FieldsetService) {
@@ -22,12 +21,7 @@ export class FieldEditorComponent implements OnInit {
     ngOnInit():any {
         if (this.fieldSlot.field === null) {
             this.fieldSlot.field = new DataField('');
-        }
-        if (this.fieldSlot.field instanceof DataField) {
-            this.isDataField = true;
-            console.log('field being edited: ', this.fieldSlot.field);
-        } else {
-            this.isDataField = false;
+            this.fieldSlot.isDataField = true;
         }
 
         this.dataTypeOptions = this.fieldsetService.getFieldDataTypes();
@@ -42,7 +36,7 @@ export class FieldEditorComponent implements OnInit {
     }
 
     toggleView($event): void {
-        this.isDataField = !this.isDataField;
+        this.fieldSlot.isDataField = !this.fieldSlot.isDataField;
         //$event.preventDefault();
     }
 
@@ -59,8 +53,4 @@ export class FieldEditorComponent implements OnInit {
         console.log('setting data type:', dataType);
         field.dataType = parseInt(dataType);
     }
-
-
-
-
 }
