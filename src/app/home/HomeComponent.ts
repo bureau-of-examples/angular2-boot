@@ -16,7 +16,7 @@ import {RouteDestinationComponent} from '../common/navigation/RouteDestinationCo
     {path:'/news', name:'News', component: NewsComponent, useAsDefault: true},
     {path:'/support/...', name:'Support', component: SupportComponent},
     {path:'/docs', name:'Docs', component: DocsComponent},
-    {path:'/contact', name:'Contact', component: ContactComponent},
+    {path:'/contact/...', name:'Contact', component: ContactComponent},
     {path:'/about', name:'About', component: AboutComponent}
 ])
 export class HomeComponent extends RouteDestinationComponent {

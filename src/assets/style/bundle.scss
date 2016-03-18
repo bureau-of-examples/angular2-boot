@@ -183,4 +183,16 @@ li.callout {
     }
   }
 }
+
+.ab-horizontal-list {
+  li {
+    display: inline-block;
+    list-style-type: none;
+    border: 3px solid yellowgreen;
+
+    a {
+      padding: 0.5em;
+    }
+  }
+}
 @import "../../../node_modules/font-awesome/scss/font-awesome";

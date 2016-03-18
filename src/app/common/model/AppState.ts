@@ -1,12 +1,15 @@
 import {Fieldset, DataField, FieldSlot, FieldDataType} from './Fieldset';
+import {ContactModel} from './ContactModel';
 
 
 export class AppState {
 
     fieldsets: Fieldset[] = [];
+    contacts: ContactModel[] = [];
 
     loadInitialData(): void {
         this.populateMockFieldsets();
+        this.populateMockContacts();
     }
 
     private populateMockFieldsets() {
@@ -34,5 +37,11 @@ export class AppState {
         this.fieldsets.push(phonePrices);
     }
 
+    private populateMockContacts() {
+        var contact: ContactModel = new ContactModel();
+        contact.name = 'test1';
+        contact.data = {};
+        this.contacts.push(contact);
+    }
 }
 

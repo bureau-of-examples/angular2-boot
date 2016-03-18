@@ -1,0 +1,11 @@
+
+<div *ngIf="contacts">
+    <ul class="ab-horizontal-list">
+        <li *ngFor="#item of contacts">
+            <a [routerLink]="['ContactDetails', {id: item.id}]">{{item.name}}</a></li>
+    </ul>
+<hr>
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+</div>
