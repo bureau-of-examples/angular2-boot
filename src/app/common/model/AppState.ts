@@ -39,6 +39,7 @@ export class AppState {
 
     private populateMockContacts() {
         var contact: ContactModel = new ContactModel();
+        contact.id = '1';
         contact.name = 'test1';
         contact.data = {};
         this.contacts.push(contact);

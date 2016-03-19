@@ -1,3 +1,18 @@
 
+<div *ngIf="contact">
+    Hi {{contact.name}}
 
-todo !
+    <form *ngIf="fieldset">
+        <p>Contact Data - {{fieldset.name}}</p>
+        <hr>
+        <div *ngFor="#item of fieldset.children" >
+            <div *ngIf="item.isDataField">
+                <label> {{item.field.name}}
+                 <input [(ngModel)]="formData[item.field.name]">
+                </label>
+            </div>
+        </div>
+
+        <button class="button" (click)="save()">Save</button>
+    </form>
+</div>
