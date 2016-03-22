@@ -3,7 +3,7 @@ import {RouteParams, OnActivate, ComponentInstruction, OnDeactivate} from 'angul
 import {SupportTabService} from '../SupportTabService';
 import {RouterLinkModel} from '../../../common/model/RouterLinkModel';
 import {FieldsetService} from '../../../services/FieldsetService';
-import {Fieldset, FieldSlot} from '../../../common/model/Fieldset';
+import {FieldsetModel, FieldSlotModel} from '../../../common/model/FieldsetMOdel';
 import {FieldEditorComponent} from './FieldEditorComponent';
 
 @Component({
@@ -13,7 +13,7 @@ import {FieldEditorComponent} from './FieldEditorComponent';
 export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
 
     private id:string;
-    private fieldset:Fieldset;
+    private fieldset:FieldsetModel;
     private link:RouterLinkModel;
 
     constructor(private routeParams:RouteParams,
@@ -43,11 +43,11 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
         if (this.fieldset === null)
             return;
 
-        var slot:FieldSlot = new FieldSlot(null);
+        var slot:FieldSlotModel = new FieldSlotModel(null);
         this.fieldset.children.push(slot);
     }
 
-    removeSlot(item:FieldSlot):void {
+    removeSlot(item:FieldSlotModel):void {
 
         var index:number = this.fieldset.children.indexOf(item);
         if (index >= 0) {
@@ -55,7 +55,7 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
         }
     }
 
-    save(): void {
+    save():void {
         this.fieldsetService.save(this.fieldset);
     }
 

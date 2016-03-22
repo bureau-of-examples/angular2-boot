@@ -3,7 +3,7 @@ import {ComponentInstruction, ROUTER_DIRECTIVES} from 'angular2/router';
 import {NestedViewComponent} from '../../../common/navigation/NestedViewComponent';
 import {SupportTabService} from '../SupportTabService';
 import {FieldsetService} from '../../../services/FieldsetService';
-import {Fieldset} from '../../../common/model/Fieldset';
+import {FieldsetModel} from '../../../common/model/FieldsetModel';
 
 @Component({
     templateUrl: './app/home/support/fieldset-definition/FieldsetDefinitionComponent.html',
@@ -12,7 +12,7 @@ import {Fieldset} from '../../../common/model/Fieldset';
 export class FieldsetDefinitionComponent extends NestedViewComponent {
 
     private loaded: boolean = false;
-    private fieldsets: Fieldset[];
+    private fieldsets: FieldsetModel[];
 
     constructor(
         private supportTabService:SupportTabService,

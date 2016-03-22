@@ -1,6 +1,6 @@
 ///<reference path="../../../ambient/foundation.d.ts" />
 
-import {Component, AfterViewInit} from 'angular2/core';
+import {Component, AfterViewInit, ElementRef} from 'angular2/core';
 import {ComponentInstruction} from 'angular2/router';
 import {NestedViewComponent} from '../../../common/navigation/NestedViewComponent';
 import {SupportTabService} from '../SupportTabService';
@@ -16,15 +16,19 @@ export class ProductTypeComponent extends NestedViewComponent implements AfterVi
     editedProductType:ProductTypeModel = {id: '', name: '', description: ''};
     productTypeList:ProductTypeModel[];
     private loaded: boolean = false;
+    private saving: boolean = false;
 
     constructor(private supportTabService:SupportTabService,
-                private productTypeService:ProductTypeService) {
+                private productTypeService:ProductTypeService,
+                private element: ElementRef
+    ) {
         super();
         this.refresh();
     }
 
     refresh() {
         this.productTypeService.getAll().subscribe(result => {
+            console.log('retrieved product type list:', result);
             this.productTypeList = result;
             this.loaded = true;
         });
@@ -58,9 +62,18 @@ export class ProductTypeComponent extends NestedViewComponent implements AfterVi
 
     createProductType() {
         console.log('creating new product type');
-
         this.editedProductType  = {id: '', name: '', description: ''};
-        this.productTypeService.add(this.editedProductType).subscribe(x => this.refresh());
         this.editor.open();
+    }
+
+    saveProductType(closeButton) {
+        this.saving = true;
+        this.productTypeService.add(this.editedProductType).subscribe(() => {
+            this.refresh();
+            this.saving = false;
+            closeButton.click();
+        }, ()=> {
+            this.saving = false;
+        });
     }
 }

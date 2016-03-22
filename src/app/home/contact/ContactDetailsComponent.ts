@@ -2,7 +2,7 @@ import {Component, OnInit} from 'angular2/core';
 import {DataService} from '../../services/DataService';
 import {RouteParams} from 'angular2/router';
 import {ContactModel} from '../../common/model/ContactModel';
-import {Fieldset} from '../../common/model/Fieldset';
+import {FieldsetModel} from '../../common/model/FieldsetModel';
 
 @Component({
     templateUrl: './app/home/contact/ContactDetailsComponent.html'
@@ -11,7 +11,7 @@ export class ContactDetailsComponent implements OnInit {
 
     private id:string;
     private contact:ContactModel = null;
-    private fieldset:Fieldset = null;
+    private fieldset: FieldsetModel = null;
     private formData:any;
 
     constructor(private dataService:DataService,

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from 'angular2/core';
-import {FieldSlot, DataField, Fieldset} from '../../../common/model/Fieldset';
-import {SelectOPtionModel} from '../../../common/model/SelectOPtionModel';
+import {FieldSlotModel, DataFieldModel, FieldsetModel} from '../../../common/model/FieldsetModel';
+import {SelectOptionModel} from '../../../common/model/SelectOPtionModel';
 import {FieldsetService} from '../../../services/FieldsetService';
 import {TypeAheadComponent} from '../../../common/component/TypeAheadComponent';
 
@@ -12,15 +12,16 @@ import {TypeAheadComponent} from '../../../common/component/TypeAheadComponent';
 })
 export class FieldEditorComponent implements OnInit {
 
-    @Input() fieldSlot:FieldSlot;
-    private dataTypeOptions: SelectOPtionModel[];
+    @Input()
+    fieldSlot:FieldSlotModel;
+    private dataTypeOptions:SelectOptionModel[];
 
-    constructor(private fieldsetService: FieldsetService) {
+    constructor(private fieldsetService:FieldsetService) {
     }
 
     ngOnInit():any {
         if (this.fieldSlot.field === null) {
-            this.fieldSlot.field = new DataField('');
+            this.fieldSlot.field = new DataFieldModel('');
             this.fieldSlot.isDataField = true;
         }
 
@@ -28,14 +29,14 @@ export class FieldEditorComponent implements OnInit {
         return undefined;
     }
 
-    getCurrentFieldset(): any {
-        if(this.fieldSlot.field instanceof Fieldset) {
+    getCurrentFieldset():any {
+        if (this.fieldSlot.field instanceof FieldsetModel) {
             return this.fieldSlot.field;
         }
         return null;
     }
 
-    toggleView($event): void {
+    toggleView($event):void {
         this.fieldSlot.isDataField = !this.fieldSlot.isDataField;
         //$event.preventDefault();
     }
@@ -49,7 +50,7 @@ export class FieldEditorComponent implements OnInit {
         this.fieldSlot.field = $event;
     }
 
-    setDataType(field: DataField, dataType: string): void {
+    setDataType(field:DataFieldModel, dataType:string):void {
         console.log('setting data type:', dataType);
         field.dataType = parseInt(dataType);
     }

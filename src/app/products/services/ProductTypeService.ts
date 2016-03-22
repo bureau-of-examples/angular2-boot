@@ -1,34 +1,26 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Rx';
 import {ProductTypeModel} from '../../common/model/ProductTypeModel';
+import {DataService} from '../../services/DataService';
 
 @Injectable()
 export class ProductTypeService {
 
-    mockProductTypeList: ProductTypeModel[] = [
-        {id: '1', name: 'Phone', description: 'Smart phones and utility phones'},
-        {id: '2', name: 'Computer', description: 'Laptop, desktop, 2-in-1 and all-in-one'}
-    ];
-
-    private nextProductTypeId: number = 3;
-
-    getAll(): Observable<ProductTypeModel[]> {
-        return Observable.interval(500).take(1).map(index => this.mockProductTypeList);
+    constructor(private dataService:DataService) {
     }
 
-    delete(id: string): Observable<String> {
-        for(var i: number = 0; i < this.mockProductTypeList.length; i++) {
-            if(this.mockProductTypeList[i].id === id) {
-                this.mockProductTypeList.splice(i, 1);
-            }
-        }
-        return Observable.interval(500).take(1).map(index => 'success');
+    getAll():Observable<ProductTypeModel[]> {
+        return this.dataService.getProductTypeList();
     }
 
-    add(editedProductType:ProductTypeModel): Observable<string> {
-        editedProductType.id = '' + this.nextProductTypeId++;
-        this.mockProductTypeList.push(editedProductType);
-        return Observable.interval(500).take(1).map(index => 'success');
+    delete(id:string):Observable<ProductTypeModel> {
+
+        return this.dataService.deleteProductType(id);
+    }
+
+    add(editedProductType:ProductTypeModel):Observable<ProductTypeModel> {
+
+        return this.dataService.saveProductType(editedProductType);
     }
 }
 
