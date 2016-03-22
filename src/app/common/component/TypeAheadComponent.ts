@@ -15,6 +15,7 @@ export class TypeAheadComponent implements OnInit, QueryCallback {
     private static QUERY_DELAY:number = 500;
 
     @Input() currentItem: any;
+    @Input() required: boolean;
     @Output() itemChange:EventEmitter<any> = new EventEmitter();
     @Output() query:EventEmitter<QueryCallback> = new EventEmitter();
 

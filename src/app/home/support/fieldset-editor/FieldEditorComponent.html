@@ -1,20 +1,20 @@
-<div class="callout" [ngSwitch]="fieldSlot.isDataField">
+<div class="callout" style="padding-bottom: 0" [ngSwitch]="fieldSlot.isDataField">
     <div>
         <label>
             Select Fieldset <input type="checkbox" [checked]="!fieldSlot.isDataField" (click)="toggleView($event)">
         </label>
     </div>
 
-    <div *ngSwitchWhen="true">
+    <div *ngSwitchWhen="true" class="row">
 
-        <div>
+        <div class="medium-6 columns">
             <label>Field Name
-                <input type="text" [(ngModel)]="fieldSlot.field.name"></label>
+                <input type="text" [(ngModel)]="fieldSlot.field.name" [attr.required]="required" ></label>
         </div>
 
-        <div>
+        <div class="medium-6 columns">
             <label>Field Data Type
-                <select #dataTypeSelect [ngModel]="'' + fieldSlot.field.dataType" (change)="setDataType(fieldSlot.field, dataTypeSelect.value)">
+                <select #dataTypeSelect [ngModel]="'' + fieldSlot.field.dataType" (change)="setDataType(fieldSlot.field, dataTypeSelect.value)" [attr.required]="required">
                     <option *ngFor="#item of dataTypeOptions" value="{{item.value}}">{{item.key}}</option>
                 </select>
             </label>
@@ -25,7 +25,7 @@
         <div>
             <label>
                 Fieldset
-                <ab-type-ahead (query)="searchFieldsets($event)" (itemChange)="fieldsetChanged($event)" [currentItem]="getCurrentFieldset()"></ab-type-ahead>
+                <ab-type-ahead (query)="searchFieldsets($event)" (itemChange)="fieldsetChanged($event)" [currentItem]="getCurrentFieldset()" [required]="true"></ab-type-ahead>
             </label>
         </div>
 

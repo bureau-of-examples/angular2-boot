@@ -4,6 +4,8 @@ $body-background: #efefef;
 @import "../../../node_modules/foundation-sites/scss/foundation";
 @include foundation-everything;
 
+$content-background: #fefefe;
+
 p {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
@@ -34,13 +36,13 @@ p {
   font-weight: 300;
 
   .router-link-active {
-    background-color:#fefefe;
+    background-color:$content-background;
     font-weight: 500;
   }
 }
 
 .ab-main {
-  background-color:#fefefe;
+  background-color:$content-background;
   padding:1em;
   min-height:12em;
 }
@@ -107,17 +109,21 @@ p {
 .ab-vertical-content {
   padding: 1em;
   background-color: #e6e6e6;
-  min-height: 10em;
+  min-height: 15em;
 
   table {
     caption {
       margin-top: 0;
     }
+
+    th, td {
+      padding: 6px 8px;
+    }
   }
 }
 
 article.ab-content {
-  background-color: #fefefe;
+  background-color: $content-background;
   margin: 0 1px;
   padding: 2em;
 }
@@ -125,17 +131,23 @@ article.ab-content {
 .ab-list {
 
   margin-left: 0;
+  background-color: $content-background;
 
   li {
     list-style-type: none;
-    padding: 1em;
-    font-size: 1.2em;
-    background-color: #efefef;
-  }
 
-  a:hover {
-    color:orangered;
-    font-weight: bolder;
+    font-size: 1.2em;
+    border-bottom: 1px solid $body-background;
+
+    a {
+      padding: 1em;
+      display: inline-block;
+      width: 100%;
+
+      &:hover {
+        background-color: $body-background;
+      }
+    }
   }
 }
 
@@ -190,4 +202,9 @@ li.callout {
     }
   }
 }
+
+form label h5 {
+  color: $body-font-color;
+}
+
 @import "../../../node_modules/font-awesome/scss/font-awesome";

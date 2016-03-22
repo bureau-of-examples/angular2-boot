@@ -1,39 +1,54 @@
 <div class="ab-vertical-content">
-    <h1>Edit Fieldset {{id}}</h1>
-    <form *ngIf="fieldset">
-        <div>
-            <label for="name">Name</label>
-            <input id="name" type="text" [(ngModel)]="fieldset.name">
+    <div *ngIf="!fieldset">Loading...</div>
+
+    <a id="fieldset-editor-top"></a>
+
+    <form *ngIf="fieldset" (ngSubmit)="save()">
+
+        <div class="clearfix">
+            <h4 class="pull-left">Fieldset {{id}} - {{fieldset?.name}}</h4>
+            <button type="submit" class="pull-right button" >Save</button>
         </div>
 
-        <ul>
-            <li *ngFor="#item of fieldset.children" class="callout">
+        <div>
+            <label><h5>Name</h5>
+                <input type="text" [(ngModel)]="fieldset.name" required>
+            </label>
+        </div>
+
+        <div class="clearfix">
+            <h5 class="pull-left" style="margin-top: 0.5em">Slots</h5>
+            <button style="margin-bottom:0.5em;" class="button pull-right" (click)="addSlot()">Add</button>
+        </div>
+
+        <ul style="margin-left: 0">
+            <li *ngFor="#item of fieldset.children" class="callout" style="padding-left: 1em; padding-bottom: 0">
                 <fieldset>
-                    <div>
-                        <label for="required">Required</label>
-                        <input id="required" type="text" [(ngModel)]="item.required">
+                    <div class="row">
+                        <div class="medium-4 columns">
+                            <label for="required">Required</label>
+                            <input id="required" type="text" [(ngModel)]="item.required">
+                        </div>
+                        <div class="medium-4 columns">
+                            <label for="minCount">Min Count</label>
+                            <input id="minCount" type="text" [(ngModel)]="item.minCount">
+                        </div>
+                        <div class="medium-4 columns">
+                            <label for="maxCount">Max Count</label>
+                            <input id="maxCount" type="text" [(ngModel)]="item.maxCount">
+                        </div>
                     </div>
-                    <div>
-                        <label for="minCount" >Min Count</label>
-                        <input id="minCount" type="text" [(ngModel)]="item.minCount">
-                    </div>
-                    <div>
-                        <label for="maxCount" >Max Count</label>
-                        <input id="maxCount" type="text" [(ngModel)]="item.maxCount">
-                    </div>
+
                     <div>
                         <ab-field-editor [fieldSlot]="item"></ab-field-editor>
                     </div>
                     <div>
-                        <button class="button warning" (click)="removeSlot(item)" >Remove</button>
+                        <button class="button warning" (click)="removeSlot(item)">Remove</button>
                     </div>
                 </fieldset>
             </li>
         </ul>
-
-        <button class="button" (click)="addSlot()">Add</button>
-
-
+        <a id="fieldset-editor-bottom" (click)="goToElement('fieldset-editor-top')">Back to top</a>
     </form>
-    <button class="button" (click)="save()">Save</button>
+
 </div>

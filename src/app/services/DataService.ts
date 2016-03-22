@@ -195,7 +195,7 @@ export class DataService {
 
     private saveItem<T extends BaseModel>(collectionName: string, item: T): Observable<T> {
 
-        return Observable.interval(HTTP_DELAY).take(1).map(() => {
+        var observable = Observable.interval(HTTP_DELAY).take(1).map(() => {
             var list:BaseModel[] = this.state[collectionName];
             if(!item.id) {
                 item.id = '' + this.keySequence[collectionName]++;
@@ -214,6 +214,7 @@ export class DataService {
             }
             return null;
         });
+        return Observable.fromPromise(observable.toPromise()); //trigger
     }
 
     private deleteItem<T extends BaseModel>(collectionName: string, id: string): Observable<T> {
@@ -241,6 +242,12 @@ export class DataService {
     private loadInitialData(): void {
         console.log('creating initial app state...');
         this.state = new AppStateModel();
+
+        this.keySequence['fieldsets'] = 1;
+        this.keySequence['dataFields'] = 1;
+        this.keySequence['contacts'] = 1;
+        this.keySequence['productTypes'] = 1;
+
         this.populateMockFieldsets();
         this.populateMockContacts();
         this.populateMockProductTypeList();
@@ -249,8 +256,6 @@ export class DataService {
     private populateMockFieldsets() {
 
         console.log('add fieldsets...');
-        this.keySequence['fieldsets'] = 1;
-        this.keySequence['dataFields'] = 1;
 
         var cpu: DataFieldModel = new DataFieldModel('cpu');
         this.saveDataField(cpu);
@@ -295,7 +300,6 @@ export class DataService {
     private populateMockContacts() {
 
         console.log('add contacts...');
-        this.keySequence['contacts'] = 1;
 
         var contact: ContactModel = new ContactModel();
         contact.name = 'test1';
@@ -306,7 +310,6 @@ export class DataService {
     private populateMockProductTypeList() {
 
         console.log('add product types..');
-        this.keySequence['productTypes'] = 1;
 
         var phone: ProductTypeModel = new ProductTypeModel();
         phone.name = 'Phone';

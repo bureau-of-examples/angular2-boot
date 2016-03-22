@@ -55,9 +55,12 @@ export class ProductTypeComponent extends NestedViewComponent implements AfterVi
         }
     }
 
-    deleteProductType(id:string):void {
-        console.log('deleting product type: ' + id);
-        this.productTypeService.delete(id).subscribe(x => this.refresh());
+    deleteProductType(id:string, elem: any):void {
+        if(window.confirm('Are you sure you want to delete this product type?')) {
+            console.log('deleting product type: ' + id);
+            jQuery(elem).prop('disabled', true);
+            this.productTypeService.delete(id).subscribe(() => this.refresh(), () => jQuery(elem).prop('disabled', false));
+        }
     }
 
     createProductType() {

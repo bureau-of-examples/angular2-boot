@@ -1,6 +1,9 @@
 <div class="ab-vertical-content">
 
-    <h2>Fieldset Definition</h2>
+    <div class="clearfix">
+        <h4 class="pull-left">Fieldset Definition</h4> <a [routerLink]="['FieldsetEditor', {id: ''}]" class="button pull-right">Create</a>
+    </div>
+
     <p *ngIf="!loaded">Loading...</p>
     <ul class="ab-list">
         <li *ngFor="#item of fieldsets">

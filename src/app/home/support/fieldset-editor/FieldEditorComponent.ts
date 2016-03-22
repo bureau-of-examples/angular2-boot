@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from 'angular2/core';
+import {Component, Input, OnInit, AfterViewInit, ChangeDetectorRef} from 'angular2/core';
 import {FieldSlotModel, DataFieldModel, FieldsetModel} from '../../../common/model/FieldsetModel';
 import {SelectOptionModel} from '../../../common/model/SelectOPtionModel';
 import {FieldsetService} from '../../../services/FieldsetService';
@@ -10,14 +10,17 @@ import {TypeAheadComponent} from '../../../common/component/TypeAheadComponent';
     templateUrl: './app/home/support/fieldset-editor/FieldEditorComponent.html',
     directives: [TypeAheadComponent]
 })
-export class FieldEditorComponent implements OnInit {
+export class FieldEditorComponent implements OnInit, AfterViewInit {
 
     @Input()
     fieldSlot:FieldSlotModel;
     private dataTypeOptions:SelectOptionModel[];
+    private required = false;
 
-    constructor(private fieldsetService:FieldsetService) {
-    }
+    constructor(
+        private fieldsetService:FieldsetService,
+        private changeDetectorRef: ChangeDetectorRef
+    ) {}
 
     ngOnInit():any {
         if (this.fieldSlot.field === null) {
@@ -26,6 +29,12 @@ export class FieldEditorComponent implements OnInit {
         }
 
         this.dataTypeOptions = this.fieldsetService.getFieldDataTypes();
+        return undefined;
+    }
+
+    ngAfterViewInit():any {
+        this.required = true;
+        this.changeDetectorRef.detectChanges();
         return undefined;
     }
 

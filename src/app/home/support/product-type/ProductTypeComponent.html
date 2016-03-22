@@ -1,6 +1,6 @@
 <div class="ab-vertical-content">
 
-    <h2>Product Type</h2>
+    <h4>Product Type</h4>
     <p *ngIf="!loaded">Loading...</p>
 
     <table *ngIf="loaded" class="hover">
@@ -18,7 +18,7 @@
             <td><a (click)="editProductType(item.id)">{{item.name}}</a></td>
             <td>{{item.description}}</td>
             <td>
-                <button (click)="deleteProductType(item.id)" class="button warning">Delete</button>
+                <button #deleteButton (click)="deleteProductType(item.id, deleteButton)" class="button warning">Delete</button>
             </td>
         </tr>
         </tbody>

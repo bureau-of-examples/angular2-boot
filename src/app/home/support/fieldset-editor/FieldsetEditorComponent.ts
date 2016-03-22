@@ -11,7 +11,7 @@ import {FieldEditorComponent} from './FieldEditorComponent';
     directives: [FieldEditorComponent]
 })
 export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
-
+    
     private id:string;
     private fieldset:FieldsetModel;
     private link:RouterLinkModel;
@@ -20,13 +20,17 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
                 private supportTabService:SupportTabService,
                 private fieldsetService:FieldsetService) {
         this.id = this.routeParams.get('id');
-        this.fieldsetService.getOne(this.id).subscribe(result => this.fieldset = result);
-        console.log('editing fieldset ' + this.id);
+        if(this.id) {
+            this.fieldsetService.getOne(this.id).subscribe(result => this.fieldset = result);
+            console.log('editing fieldset ' + this.id);
+        } else {
+            this.fieldset = new FieldsetModel('New fieldset');
+        }
     }
 
     routerOnActivate(nextInstruction:ComponentInstruction, prevInstruction:ComponentInstruction):any {
 
-        var tabName:string = 'editor ' + this.id;
+        var tabName:string = this.id ? 'Edit Fieldset ' + this.id : 'Create New Fieldset';
         this.supportTabService.setSelectedTab(tabName);
         var routerLink:any[] = ['FieldsetEditor', {id: this.id}];
         this.link = this.supportTabService.addTab(tabName, routerLink);
@@ -45,6 +49,9 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
 
         var slot:FieldSlotModel = new FieldSlotModel(null);
         this.fieldset.children.push(slot);
+        setTimeout(()=> { //todo wait for angular to render.
+            this.goToElement('fieldset-editor-bottom');
+        }, 10);
     }
 
     removeSlot(item:FieldSlotModel):void {
@@ -59,6 +66,9 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
         this.fieldsetService.save(this.fieldset);
     }
 
+    goToElement(targetId): void {
+        document.getElementById(targetId).scrollIntoView();
+    }
 }
 
 
