@@ -1,11 +1,18 @@
 <header class="ab-site-header clearfix">
     <div class="float-left">
-        <a href="">
+        <a #bannerLink href="">
             <img [src]="bannerPath" alt="site banner">
         </a>
     </div>
     <div class="float-right">
-        <span>The app is good!</span>
-        <i class="fa fa-rotate-right fa-2x ab-spinning" title=""></i>
+        <div>
+            <span style="font-weight:700; padding-right:0.5em;">The app is good!</span>
+            <i class="fa fa-rotate-right fa-2x ab-spinning" title=""></i>
+        </div>
+        <div>
+            <button class="button small" (click)="clearStorage()">Clear Storage</button>
+            <button class="button small" (click)="test()">Test</button>
+        </div>
     </div>
+
 </header>

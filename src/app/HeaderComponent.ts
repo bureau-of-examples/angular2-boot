@@ -1,4 +1,10 @@
-import {Component, Input} from 'angular2/core';
+///<reference path="./ambient/foundation.d.ts" />
+
+import {Component, ViewQuery, QueryList, Input, ElementRef} from 'angular2/core';
+import {Http} from 'angular2/http';
+import {DataService} from './services/DataService';
+import {RouterLinkModel} from './common/model/RouterLinkModel';
+
 
 @Component({
     selector: 'ab-header',
@@ -6,12 +12,36 @@ import {Component, Input} from 'angular2/core';
 })
 export class HeaderComponent {
 
-    @Input() bannerPath;
+    @Input()
+    bannerPath;
+    private bannerLink:ElementRef;
 
-    constructor() {
-        if(!this.bannerPath) {
-            this.bannerPath = 'test!';
+    constructor(private dataService:DataService,
+                private http:Http,
+                @ViewQuery('bannerLink') bannerLinkQuery:QueryList<ElementRef>) {
+        bannerLinkQuery.changes.subscribe(list => {
+            console.log('query returns elementRef: ', list.first);
+            this.bannerLink = list.first;
+        });
+    }
+
+    clearStorage():void {
+        if (!this.bannerLink) {
+            alert('Header is not ready');
+            return;
         }
+
+        console.log('Clearing local storage...');
+        this.dataService.resetState();
+        this.bannerLink.nativeElement.click();
+    }
+
+    test():void {
+        this.http
+            .get('/app/json/test.json')
+            .map(res => <RouterLinkModel>res.json())
+            .subscribe(result => console.log(result));
+
     }
 }
 

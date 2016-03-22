@@ -13,8 +13,7 @@ import {
         Instruction
 }                                from 'angular2/router';
 import {
-        HTTP_PROVIDERS,
-        Http
+        HTTP_PROVIDERS
 }                                from 'angular2/http';
 import {bootstrap}              from 'angular2/platform/browser';
 import {HeaderComponent}        from './HeaderComponent';
@@ -52,7 +51,6 @@ export class MainComponent implements AfterViewInit {
         private location: Location,
         private router: Router,
         private navigationService: NavigationService,
-        private http: Http,
         private dataService: DataService
     ) {
         console.log('MainComponent.constructor');
@@ -79,13 +77,6 @@ export class MainComponent implements AfterViewInit {
             this.location.back();
         }
         this.navigationService.closeTab(item);
-    }
-
-    test(): void {
-        this.http
-            .get('/app/json/test.json')
-            .map(res => <RouterLinkModel>res.json())
-            .subscribe(result => console.log(result));
     }
 
     clear(): void {
