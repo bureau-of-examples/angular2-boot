@@ -1,7 +1,6 @@
+import {BaseModel} from './BaseModel';
 
-
-export class ProductTypeModel {
-    id: string;
+export class ProductTypeModel extends BaseModel {
     name: string;
     description: string;
 }

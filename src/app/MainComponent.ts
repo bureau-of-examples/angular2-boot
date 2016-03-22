@@ -78,10 +78,6 @@ export class MainComponent implements AfterViewInit {
         }
         this.navigationService.closeTab(item);
     }
-
-    clear(): void {
-        this.dataService.resetState();
-    }
 }
 
 

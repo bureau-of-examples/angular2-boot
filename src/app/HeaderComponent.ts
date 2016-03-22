@@ -32,7 +32,7 @@ export class HeaderComponent {
         }
 
         console.log('Clearing local storage...');
-        this.dataService.resetState();
+        this.dataService.clearState();
         this.bannerLink.nativeElement.click();
     }
 

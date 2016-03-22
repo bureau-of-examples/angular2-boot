@@ -1,7 +1,7 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Rx';
-import {Fieldset, FieldDataType} from '../common/model/Fieldset';
-import {SelectOPtionModel} from '../common/model/SelectOPtionModel';
+import {FieldsetModel, FieldDataType} from '../common/model/FieldsetModel';
+import {SelectOptionModel} from '../common/model/SelectOPtionModel';
 import {DataService} from './DataService';
 import {UtilService} from './UtilService';
 
@@ -9,28 +9,28 @@ import {UtilService} from './UtilService';
 @Injectable()
 export class FieldsetService {
 
-    private dataTypeOptions: SelectOPtionModel[] = null;
+    private dataTypeOptions: SelectOptionModel[] = null;
 
     constructor(
         private dataService: DataService
     ) {}
 
-    getAll(): Observable<Fieldset[]> {
+    getAll(): Observable<FieldsetModel[]> {
         return this.dataService.getFieldsets();
     }
 
-    getOne(id: string): Observable<Fieldset> {
+    getOne(id: string): Observable<FieldsetModel> {
         return this.dataService.getFieldset(id);
     }
 
-    search(keywords: string): Observable<Fieldset[]> {
+    search(keywords: string): Observable<FieldsetModel[]> {
         return this.dataService.searchFieldsets(keywords);
     }
 
-    getFieldDataTypes(): SelectOPtionModel[] {
+    getFieldDataTypes(): SelectOptionModel[] {
         if(this.dataTypeOptions === null) {
             var keys: string[] = UtilService.getStringKeys(FieldDataType);
-            var result: SelectOPtionModel[] = [];
+            var result: SelectOptionModel[] = [];
             keys.forEach(key => {
                 result.push({key: key, value: '' + FieldDataType[key]});
             });
@@ -41,7 +41,7 @@ export class FieldsetService {
     }
 
 
-    save(fieldset:Fieldset):void {
+    save(fieldset:FieldsetModel):void {
         this.dataService.saveFieldset(fieldset);
     }
 }

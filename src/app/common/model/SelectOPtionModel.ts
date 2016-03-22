@@ -1,5 +1,5 @@
 
-export class SelectOPtionModel {
+export class SelectOptionModel {
     key: string;
     value: string;
 }

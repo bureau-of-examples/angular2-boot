@@ -34,20 +34,23 @@
 
     <div class="reveal" id="productTypeEditor" data-reveal data-close-on-click="false">
         <h1>Edit Product Type {{editedProductType?.id}}</h1>
-        <form>
+        <form (ngSubmit)="saveProductType(closeButton)">
             <div class="row">
                 <div class="medium-12 columns">
                     <label>Name</label>
-                    <input type="text" [(ngModel)]="editedProductType.name">
+                    <input type="text" [(ngModel)]="editedProductType.name" required>
                 </div>
                 <div class="medium-12 columns">
                     <label>Description</label>
                     <input type="text" [(ngModel)]="editedProductType.description">
                 </div>
+                <div class="medium-12 columns">
+                    <button type="submit" class="button">Save</button>
+                </div>
             </div>
         </form>
 
-        <button class="close-button" data-close aria-label="Close reveal" type="button">
+        <button #closeButton class="close-button" data-close aria-label="Close reveal" type="button">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>

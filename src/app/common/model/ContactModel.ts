@@ -1,6 +1,6 @@
-export class ContactModel {
+import {BaseModel} from './BaseModel';
 
-    id:string;
+export class ContactModel extends BaseModel {
     fieldsetId:string = '1';
     name:string;
     data:any;
