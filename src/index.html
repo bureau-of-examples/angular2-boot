@@ -26,6 +26,12 @@
     </div>
 </div>
 
+<div class="reveal ab-dialog" id="global-overlay" data-reveal data-close-on-click="false" data-close-on-esc="false">
+    <div class="text-center" style="padding: 2em 0">
+        <i class="fa fa-spinner fa-4x ab-spinning" title="Loading..."></i>
+    </div>
+</div>
+
 <!-- inject:js -->
 <script src="libs/es6-shim/es6-shim.min.js"></script>
 <script src="libs/systemjs/dist/system-polyfills.js"></script>
@@ -39,6 +45,7 @@
 <script src="libs/jquery/dist/jquery.js"></script>
 <script src="libs/foundation-sites/dist/foundation.js"></script>
 <script src="libs/jsog/lib/JSOG.js"></script>
+<script src="libs/toastr/toastr.js"></script>
 <!-- endinject -->
 
 <!-- Configure SystemJS -->
@@ -52,6 +59,8 @@
         }
     });
     System.import('./app/MainComponent').then(null, console.error.bind(console));
+
+    jQuery(document).foundation();
 </script>
 
 </body>

@@ -1,6 +1,6 @@
 import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Rx';
-import {FieldsetModel, FieldDataType} from '../common/model/FieldsetModel';
+import {FieldsetModel, FieldDataType, DataFieldModel} from '../common/model/FieldsetModel';
 import {SelectOptionModel} from '../common/model/SelectOPtionModel';
 import {DataService} from './DataService';
 import {UtilService} from './UtilService';
@@ -40,8 +40,17 @@ export class FieldsetService {
         return this.dataTypeOptions;
     }
 
+    save(fieldset:FieldsetModel): Observable<FieldsetModel> {
 
-    save(fieldset:FieldsetModel):void {
-        this.dataService.saveFieldset(fieldset);
+        for(let i: number = 0; i < fieldset.children.length; i++) {
+            let slot = fieldset.children[i];
+            if(slot.isDataField) {
+                this.dataService.saveDataField(<DataFieldModel>slot.field);
+            } else {
+                this.dataService.saveFieldset(<FieldsetModel>slot.field);
+            }
+        }
+        
+        return this.dataService.saveFieldset(fieldset);
     }
 }

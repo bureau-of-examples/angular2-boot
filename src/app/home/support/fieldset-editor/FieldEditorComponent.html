@@ -9,7 +9,7 @@
 
         <div class="medium-6 columns">
             <label>Field Name
-                <input type="text" [(ngModel)]="fieldSlot.field.name" [attr.required]="required" ></label>
+                <input type="text" [(ngModel)]="fieldSlot.field.name" [attr.required]="required" [ngFormControl]="fieldName"></label>
         </div>
 
         <div class="medium-6 columns">

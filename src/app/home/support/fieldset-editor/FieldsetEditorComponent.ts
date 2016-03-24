@@ -1,26 +1,31 @@
+/// <reference path="../../../ambient/foundation.d.ts" />
+
 import {Component} from 'angular2/core';
+import {FORM_DIRECTIVES} from 'angular2/common';
 import {RouteParams, OnActivate, ComponentInstruction, OnDeactivate} from 'angular2/router';
 import {SupportTabService} from '../SupportTabService';
 import {RouterLinkModel} from '../../../common/model/RouterLinkModel';
 import {FieldsetService} from '../../../services/FieldsetService';
 import {FieldsetModel, FieldSlotModel} from '../../../common/model/FieldsetMOdel';
 import {FieldEditorComponent} from './FieldEditorComponent';
+import {UIService} from '../../../services/UIService';
 
 @Component({
     templateUrl: './app/home/support/fieldset-editor/FieldsetEditorComponent.html',
-    directives: [FieldEditorComponent]
+    directives: [FORM_DIRECTIVES, FieldEditorComponent]
 })
 export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
-    
+
     private id:string;
     private fieldset:FieldsetModel;
     private link:RouterLinkModel;
 
     constructor(private routeParams:RouteParams,
                 private supportTabService:SupportTabService,
-                private fieldsetService:FieldsetService) {
+                private fieldsetService:FieldsetService,
+                private uiService:UIService) {
         this.id = this.routeParams.get('id');
-        if(this.id) {
+        if (this.id) {
             this.fieldsetService.getOne(this.id).subscribe(result => this.fieldset = result);
             console.log('editing fieldset ' + this.id);
         } else {
@@ -63,10 +68,14 @@ export class FieldsetEditorComponent implements OnActivate, OnDeactivate {
     }
 
     save():void {
-        this.fieldsetService.save(this.fieldset);
+        this.uiService.globalOverlay(true);
+        this.fieldsetService.save(this.fieldset).subscribe(()=> {
+            this.uiService.globalOverlay(false);
+            toastr.success('great success!');
+        });
     }
 
-    goToElement(targetId): void {
+    goToElement(targetId):void {
         document.getElementById(targetId).scrollIntoView();
     }
 }

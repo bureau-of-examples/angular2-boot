@@ -4,6 +4,8 @@ $body-background: #efefef;
 @import "../../../node_modules/foundation-sites/scss/foundation";
 @include foundation-everything;
 
+@import "../../../node_modules/toastr/toastr.scss";
+
 $content-background: #fefefe;
 
 p {
@@ -201,6 +203,10 @@ li.callout {
       padding: 0.5em;
     }
   }
+}
+
+input.ng-invalid {
+  border-color: red;
 }
 
 form label h5 {

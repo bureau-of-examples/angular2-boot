@@ -1,20 +1,23 @@
 ///<reference path="./ambient/foundation.d.ts" />
 
 import {
-        Component,
-        AfterViewInit
-}                           from 'angular2/core';
+    Component,
+    AfterViewInit
+}                              from 'angular2/core';
 import {
-        ROUTER_PROVIDERS,
-        RouteConfig,
-        ROUTER_DIRECTIVES,
-        Location,
-        Router,
-        Instruction
-}                                from 'angular2/router';
+    FORM_PROVIDERS
+}                              from 'angular2/common';
 import {
-        HTTP_PROVIDERS
-}                                from 'angular2/http';
+    ROUTER_PROVIDERS,
+    RouteConfig,
+    ROUTER_DIRECTIVES,
+    Location,
+    Router,
+    Instruction
+}                               from 'angular2/router';
+import {
+    HTTP_PROVIDERS
+}                               from 'angular2/http';
 import {bootstrap}              from 'angular2/platform/browser';
 import {HeaderComponent}        from './HeaderComponent';
 import {HomeComponent}          from './home/HomeComponent';
@@ -27,32 +30,32 @@ import {NewsDetailsComponent}   from './home/news/NewsDetailsComponent';
 import {RouterLinkModel}        from './common/model/RouterLinkModel';
 import {ProductTypeService}     from './products/services/ProductTypeService';
 import {FieldsetService}        from './services/FieldsetService';
-import {DataService}                       from './services/DataService';
-
+import {DataService}            from './services/DataService';
+import {UIService}              from './services/UIService';
 
 @Component({
     selector: 'ab-main',
     templateUrl: './app/MainComponent.html',
-    providers: [NavigationService, NewsService, DocsService, ProductTypeService, FieldsetService, DataService, HTTP_PROVIDERS],
+    providers: [
+        HTTP_PROVIDERS, ROUTER_PROVIDERS, FORM_PROVIDERS,
+        NavigationService, NewsService, DocsService, ProductTypeService,
+        FieldsetService, DataService, UIService],
     directives: [ROUTER_DIRECTIVES, HeaderComponent]
 })
 @RouteConfig([
-    {path:'/home/...', name: 'Home', component: HomeComponent, useAsDefault: true},
+    {path: '/home/...', name: 'Home', component: HomeComponent, useAsDefault: true},
     {path: '/article/:id', name: 'NewsDetails', component: NewsDetailsComponent},
-    {path:'/products/...', name: 'Products', component: ProductsComponent},
-    {path:'/case-studies/...', name: 'CaseStudies', component: CaseStudiesComponent}
+    {path: '/products/...', name: 'Products', component: ProductsComponent},
+    {path: '/case-studies/...', name: 'CaseStudies', component: CaseStudiesComponent}
 ])
 export class MainComponent implements AfterViewInit {
 
     message = 'Angular2 starter project';
     counter = 0;
 
-    constructor(
-        private location: Location,
-        private router: Router,
-        private navigationService: NavigationService,
-        private dataService: DataService
-    ) {
+    constructor(private location:Location,
+                private router:Router,
+                private navigationService:NavigationService) {
         console.log('MainComponent.constructor');
     }
 
@@ -60,19 +63,19 @@ export class MainComponent implements AfterViewInit {
         //placeholder
     }
 
-    pathStartWith(portion : string): boolean {
+    pathStartWith(portion:string):boolean {
         return this.location.path().startsWith(portion);
     }
 
-    closeTab($event: any, item: RouterLinkModel): void {
+    closeTab($event:any, item:RouterLinkModel):void {
         $event.preventDefault();
         $event.stopPropagation();
 
         console.log('closing tab:');
         console.log(item.routerLink);
 
-        var thisRoute: Instruction = this.router.generate(item.routerLink);
-        if(this.router.isRouteActive(thisRoute)) {
+        var thisRoute:Instruction = this.router.generate(item.routerLink);
+        if (this.router.isRouteActive(thisRoute)) {
             console.log('tab is active, go back to previous route');
             this.location.back();
         }
@@ -81,6 +84,4 @@ export class MainComponent implements AfterViewInit {
 }
 
 
-bootstrap(<any>MainComponent, [
-    ROUTER_PROVIDERS
-]);
+bootstrap(<any>MainComponent, []);

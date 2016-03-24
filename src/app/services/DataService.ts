@@ -206,7 +206,7 @@ export class DataService {
                 for(var i: number=0; i<list.length; i++) {
                     let result: BaseModel = list[i];
                     if(result.id === item.id) {
-                        BaseModel[i] = item;
+                        list[i] = item;
                         console.log('saved ', item);
                         return item;
                     }

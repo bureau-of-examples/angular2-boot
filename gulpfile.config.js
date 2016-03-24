@@ -13,7 +13,8 @@ var config = {
     foundationSitesLibs: [
         'node_modules/jquery/dist/jquery.js',
         'node_modules/foundation-sites/dist/foundation.js',
-        'node_modules/jsog/lib/JSOG.js'
+        'node_modules/jsog/lib/JSOG.js',
+        'node_modules/toastr/toastr.js'
     ],
     jsMaps: [
         'node_modules/systemjs/dist/system-polyfills.js.map',

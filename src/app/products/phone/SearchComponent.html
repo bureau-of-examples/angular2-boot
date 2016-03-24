@@ -1,1 +1,56 @@
-look at these phones...
+<div class="ab-vertical-content">
+    look at these phones...
+
+    <h5>Form Test</h5>
+
+    <div class="row">
+        <div class="medium-12 columns">
+            <form (ngSubmit)="save()" #theForm="ngForm">
+                <div class="row">
+
+                    <div class="medium-3 columns">
+                        <label>Field 1
+                            <input type="text" ngControl="field1" required>
+                        </label>
+                    </div>
+                    <div class="medium-3 columns">
+                        <label>Field 2
+                            <input type="number" ngControl="field2" min="0">
+                        </label>
+                    </div>
+                    <div class="medium-3 columns">
+                        <label>Field 3
+                            <input type="text" ngControl="field3" pattern="\d+">
+                        </label>
+                    </div>
+                    <div class="medium-3 columns">
+                        <label *ngIf="showField4">Field 4
+                            <input type="text" ngControl="field4" required >
+                        </label>
+                    </div>
+
+                </div>
+
+                <hr>
+                <h5>ngControl does not work in ngFor</h5>
+                <div *ngFor="#item of sampleCollection" class="row">
+                    <div class="medium-12 columns; #i = index">
+                        <label>
+                            {{item.name}}
+                            <input type="text" ngControl="itemField{{i}}" [attr.pattern]="item.pattern">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="medium-12 columns">
+                        <button class="button" [disabled]="!theForm.form.valid">Save</button>
+                        <button type="button" class="button" (click)="showField4 = !showField4">Toggle</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+

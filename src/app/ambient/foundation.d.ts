@@ -1,5 +1,11 @@
 
-declare function jQuery(element:any):any;
+declare interface IjQueryObject {
+    prop: Function;
+    unload: Function;
+    foundation: Function;
+}
+
+declare function jQuery(element:any): IjQueryObject;
 
 declare module Foundation {
     export class Tabs {
@@ -21,3 +27,6 @@ declare module JSOG {
 
     export function decode(obj: any): any;
 }
+
+declare var toastr: any;
+

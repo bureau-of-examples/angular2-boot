@@ -3,11 +3,12 @@
 
     <a id="fieldset-editor-top"></a>
 
-    <form *ngIf="fieldset" (ngSubmit)="save()">
+
+    <form *ngIf="fieldset" #fieldsetForm="ngForm" (ngSubmit)="save()">
 
         <div class="clearfix">
             <h4 class="pull-left">Fieldset {{id}} - {{fieldset?.name}}</h4>
-            <button type="submit" class="pull-right button" >Save</button>
+            <button type="submit" class="pull-right button" [disabled]="!fieldsetForm.form.valid" >Save</button>
         </div>
 
         <div>
@@ -22,7 +23,7 @@
         </div>
 
         <ul style="margin-left: 0">
-            <li *ngFor="#item of fieldset.children" class="callout" style="padding-left: 1em; padding-bottom: 0">
+            <li *ngFor="#item of fieldset.children; #i = index" class="callout" style="padding-left: 1em; padding-bottom: 0">
                 <fieldset>
                     <div class="row">
                         <div class="medium-4 columns">
@@ -31,16 +32,16 @@
                         </div>
                         <div class="medium-4 columns">
                             <label for="minCount">Min Count</label>
-                            <input id="minCount" type="text" [(ngModel)]="item.minCount">
+                            <input id="minCount" type="number" [(ngModel)]="item.minCount" >
                         </div>
                         <div class="medium-4 columns">
                             <label for="maxCount">Max Count</label>
-                            <input id="maxCount" type="text" [(ngModel)]="item.maxCount">
+                            <input id="maxCount" type="number" [(ngModel)]="item.maxCount">
                         </div>
                     </div>
 
                     <div>
-                        <ab-field-editor [fieldSlot]="item"></ab-field-editor>
+                        <ab-field-editor [fieldSlot]="item" [parent]="fieldset" controlName="slot{{i}}_fieldName"></ab-field-editor>
                     </div>
                     <div>
                         <button class="button warning" (click)="removeSlot(item)">Remove</button>
