@@ -1,7 +1,42 @@
-
 <div class="ab-vertical-content">
     Look at these computers...
 
     <h5>Form Test 2 - use form model</h5>
+
+    <div>
+        <form  (ngSubmit)="save()" #orderFrom="ngForm" [ngFormModel]="formControlGroup">
+
+            <h6>Customer Details</h6>
+            <div>
+                <label >Name:
+                    <input type="text" required [(ngModel)]="computerOrder.name" ngControl="nameControl">
+                </label>
+            </div>
+
+            <div>
+                <label>Email:
+                    <input type="email" required [(ngModel)]="computerOrder.email" ngControl="emailControl">
+                </label>
+            </div>
+
+            <h6>Required Parts</h6>
+
+            <div ngControlGroup="partsControlArray">
+                <div *ngFor="#part of computerOrder.computerParts; #i = index">
+                    <label>Part {{part.id}}
+                        <input type="text" required [(ngModel)]="part.name" [ngControl]="i" >
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <button class="button" type="button" (click)="addPart()">Add</button>
+                <button class="button" [disabled]="!orderFrom.form.valid">Save</button>
+            </div>
+
+        </form>
+
+        <p>{{computerOrder | json}}</p>
+    </div>
 
 </div>

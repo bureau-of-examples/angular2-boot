@@ -135,7 +135,7 @@ export class DataService {
 
     saveContact(item: ContactModel): Observable<ContactModel> {
 
-        return this.saveItem<ContactModel>('contacts', item);
+        return Observable.fromPromise(this.saveItem<ContactModel>('contacts', item).toPromise());
     }
 
     saveProductType(item: ProductTypeModel): Observable<ProductTypeModel> {
