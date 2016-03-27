@@ -1,1 +1,17 @@
-Look at these offers...
+<div class="ab-vertical-content">
+    Look at these offers...
+
+    <form [ngFormModel]="controlGroup" #theForm="ngForm" (ngSubmit)="save()">
+        <p>Dynamic Form Test</p>
+        <div *ngFor="#field of fields">
+            <label>{{field.label}}
+                <input type="{{field.type}}" [ngControl]="field.label" #fieldControl="ngForm">
+            </label>
+            <p *ngIf="!fieldControl.valid" style="color: red">{{fieldControl.errors | json}}</p>
+
+        </div>
+
+        <button class="button" [disabled]="!theForm.form.valid">Save</button>
+    </form>
+</div>
+
