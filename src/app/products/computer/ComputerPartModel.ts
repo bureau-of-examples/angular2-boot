@@ -1,6 +1,6 @@
 
 
-export class ComputerComponent {
+export class ComputerPartModel {
     
     id: number;
     name: string;

@@ -1,12 +1,12 @@
 import {Component, Input, OnInit, AfterViewInit, ChangeDetectorRef} from 'angular2/core';
-import {Control, FORM_DIRECTIVES} from 'angular2/common';
+import {Control, FORM_DIRECTIVES, AbstractControl} from 'angular2/common';
 import {FieldSlotModel, DataFieldModel, FieldsetModel} from '../../../common/model/FieldsetModel';
 import {TypeAheadComponent} from '../../../common/component/TypeAheadComponent';
 import {SelectOptionModel} from '../../../common/model/SelectOPtionModel';
 import {FieldsetService} from '../../../services/FieldsetService';
 
 
-function validateFieldName(control:Control, fieldSlot:FieldSlotModel, parent:FieldsetModel) {
+function validateFieldName(control: AbstractControl, fieldSlot:FieldSlotModel, parent:FieldsetModel) {
     let name = control.value;
     for (let i = 0; i < parent.children.length; i++) {
         let slot = parent.children[i];
