@@ -10,6 +10,7 @@ var yargs = require('yargs');
 ///////////////////////// Config //////////////////////////////////////////
 var scssPaths = config.styleFolder + '/**/*.scss';
 var jsLibPaths = batchReplace(config.jsLibs, 'node_modules', config.srcLibsFolder);
+jsLibPaths.push('./src/js/boot.js');
 var tsPaths = 'src/app/**/*.ts';
 var browserSupport = ['> 5%'];
 
@@ -25,7 +26,7 @@ gulp.task('clean-srcLibs', [], function(done){
 });
 
 
-gulp.task('copy-to-srcLibs', ['clean-srcLibs'], function(){
+gulp.task('copy-to-srcLibs', ['clean-srcLibs', 'copy-primeng'], function(){
     return gulp
         .src(config.jsLibs.concat(config.jsMaps), {base: 'node_modules'})
         .pipe(gulp.dest(config.srcLibsFolder));
@@ -69,7 +70,19 @@ gulp.task('copy-fonts', ['clean-fonts'], function(){
 });
 
 
-var preCompileScssTasks = ['clean-scss', 'copy-fonts'];
+gulp.task('clean-images', [], function(done){
+    clean([config.imagesFolder + '/*.*'], done)
+});
+
+
+gulp.task('copy-images', ['clean-images'], function(){
+    return gulp
+        .src(config.primeuiImages)
+        .pipe(gulp.dest(config.imagesFolder));
+});
+
+
+var preCompileScssTasks = ['clean-scss', 'copy-fonts', 'copy-images'];
 
 gulp.task('compile-scss', preCompileScssTasks, function(){
 
@@ -102,12 +115,25 @@ gulp.task('watch-scss', [], function(){
 });
 
 
+gulp.task('clean-primeng', [], function(done){
+    clean([config.primengFolder + '/*.*'], done)
+});
+
+
+gulp.task('copy-primeng', ['clean-primeng'], function(){
+    return gulp
+        .src(config.primengFiles)
+        .pipe(gulp.dest(config.primengFolder));
+});
+
+
 gulp.task('lint-ts', [], function(){
 
     return gulp
-        .src('src/**/*.ts')
+        .src('src/app/**/*.ts')
         .pipe($.tslint({
-            rulesDirectory: ["node_modules/ng2lint/dist/src"]
+            rulesDirectory: ["node_modules/ng2lint/dist/src"],
+            
         }))
         .pipe($.tslint.report('verbose'));
 });
@@ -136,8 +162,6 @@ gulp.task('watch-ts', [], function(){
     gulp.watch(tsPaths, ['compile-ts']);
 });
 
-//todo process font and image
-
 
 gulp.task('compile-and-watch-ts', [], $.sequence('compile-ts', 'watch-ts'));
 
@@ -157,7 +181,7 @@ gulp.task('bundle-libs', ['copy-to-srcLibs'], function(){
         .pipe($.concat('libs.bundle.js'))
         .pipe(gulp.dest(config.srcLibsFolder))
         .pipe($.rename('libs.bundle.min.js'))
-        .pipe($.uglify())
+        .pipe($.uglify({mangle: false})) //See http://stackoverflow.com/questions/35612100/angular2-ngif-not-working-in-deployment-environment/35636715#35636715
         .pipe($.if(yargs.argv.sourcemap, $.sourcemaps.write()))
         .pipe(gulp.dest(config.srcLibsFolder));
 });
@@ -171,7 +195,7 @@ gulp.task('inject-libs-bundle', ['bundle-libs'], function(){
 });
 
 
-//perfromance optimized serve with no watch.
+//performance optimized serve with no watch.
 gulp.task('serveP', ['compile-scssP', 'inject-libs-bundle'], $.shell.task(['node serve.js']));
 
 

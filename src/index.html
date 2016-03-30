@@ -42,26 +42,13 @@
 <script src="libs/angular2/bundles/angular2.dev.js"></script>
 <script src="libs/angular2/bundles/router.dev.js"></script>
 <script src="libs/angular2/bundles/http.dev.js"></script>
-<script src="libs/jquery/dist/jquery.js"></script>
+<script src="libs/primeui/primeui-ng-all.js"></script>
 <script src="libs/foundation-sites/dist/foundation.js"></script>
 <script src="libs/jsog/lib/JSOG.js"></script>
 <script src="libs/toastr/toastr.js"></script>
+<script src="libs/chart.js/Chart.js"></script>
+<script src="js/boot.js"></script>
 <!-- endinject -->
-
-<!-- Configure SystemJS -->
-<script>
-    System.config({
-        packages: {
-            app: {
-                format: 'register',
-                defaultExtension: 'js'
-            }
-        }
-    });
-    System.import('./app/MainComponent').then(null, console.error.bind(console));
-
-    jQuery(document).foundation();
-</script>
 
 </body>
 </html>

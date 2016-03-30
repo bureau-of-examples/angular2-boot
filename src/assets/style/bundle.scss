@@ -213,4 +213,8 @@ form label h5 {
   color: $body-font-color;
 }
 
+@import "../../../node_modules/primeui/themes/delta/theme";
+
 @import "../../../node_modules/font-awesome/scss/font-awesome";
+
+@import "../../../node_modules/primeui/primeui-ng-all";

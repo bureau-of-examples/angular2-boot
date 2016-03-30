@@ -8,4 +8,8 @@
 
 
 
-- Updated to beta 8.
+- Updated to beta 12.
+
+
+### Todo
+* make bundles and lazy load them (async route).

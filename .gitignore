@@ -10,5 +10,7 @@ npm-debug.log
 /src/libs/*
 /src/assets/fonts/*
 bundle.css
-Fieldset.js
-AppState.js
+/src/primeng
+/src/assets/images/*
+
+
