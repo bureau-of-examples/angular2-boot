@@ -4,7 +4,7 @@
 System.config({
     packages: {
         app: {
-            format: 'register',
+            format: 'cjs',
             defaultExtension: 'js'
         },
         primeng: {

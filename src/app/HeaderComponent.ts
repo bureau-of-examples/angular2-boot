@@ -8,7 +8,8 @@ import {RouterLinkModel} from './common/model/RouterLinkModel';
 
 @Component({
     selector: 'ab-header',
-    templateUrl: './app/HeaderComponent.html'
+    moduleId: module.id,
+    templateUrl: 'HeaderComponent.html'
 })
 export class HeaderComponent {
 
