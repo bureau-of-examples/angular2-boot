@@ -4,6 +4,8 @@ var del = require('del');
 var glob = require("glob");
 var gulp = require('gulp');
 var config = require('./gulpfile.config');
+var KarmaServer = require('karma').Server;
+var path = require('path');
 var $ = require('gulp-load-plugins')({lazy: true});
 var yargs = require('yargs');
 
@@ -198,6 +200,17 @@ gulp.task('inject-libs-bundle', ['bundle-libs'], function(){
 //performance optimized serve with no watch.
 gulp.task('serveP', ['compile-scssP', 'inject-libs-bundle'], $.shell.task(['node serve.js']));
 
+
+gulp.task('test', [], function(done) {
+    var karmaConfigPath = path.join(__dirname, 'karma.conf.js');
+
+    console.log('Running Karma with: ', karmaConfigPath);
+    new KarmaServer({
+        configFile: karmaConfigPath,
+        singleRun: true
+    }, done).start();
+    done();
+});
 
 ////////////////////////// Utilities //////////////////////////////////////
 function clean(path, done) {
