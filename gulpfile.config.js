@@ -1,15 +1,22 @@
+
+var polyfillLibs = [
+    'node_modules/es6-shim/es6-shim.min.js',
+    'node_modules/systemjs/dist/system-polyfills.js',
+    'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js',
+    'node_modules/angular2/bundles/angular2-polyfills.js',
+    'node_modules/systemjs/dist/system.src.js'
+];
+
+var angular2Libs = [
+    'node_modules/rxjs/bundles/Rx.js',
+    'node_modules/angular2/bundles/angular2.dev.js',
+    'node_modules/angular2/bundles/router.dev.js',
+    'node_modules/angular2/bundles/http.dev.js'
+];
+
 var config = {
-    angular2Libs: [
-        'node_modules/es6-shim/es6-shim.min.js',
-        'node_modules/systemjs/dist/system-polyfills.js',
-        'node_modules/angular2/es6/dev/src/testing/shims_for_IE.js',
-        'node_modules/angular2/bundles/angular2-polyfills.js',
-        'node_modules/systemjs/dist/system.src.js',
-        'node_modules/rxjs/bundles/Rx.js',
-        'node_modules/angular2/bundles/angular2.dev.js',
-        'node_modules/angular2/bundles/router.dev.js',
-        'node_modules/angular2/bundles/http.dev.js'
-    ],
+    polyfillLibs: polyfillLibs,
+    angular2Libs: angular2Libs,
     foundationSitesLibs: [
         'node_modules/primeui/primeui-ng-all.js',
         'node_modules/foundation-sites/dist/foundation.js',
@@ -31,7 +38,7 @@ var config = {
     primengFolder: './src/primeng'
 };
 
-config.jsLibs = config.angular2Libs.concat(config.foundationSitesLibs);
+config.jsLibs = config.polyfillLibs.concat(config.angular2Libs).concat(config.foundationSitesLibs);
 
 module.exports = config;
 

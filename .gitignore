@@ -12,6 +12,6 @@ npm-debug.log
 bundle.css
 /src/primeng
 /src/assets/images/*
-/test/*
+/src/**/*.spec.js
 
 

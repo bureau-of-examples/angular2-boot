@@ -1,5 +1,19 @@
-// Karma configuration
-// Generated on Sun Apr 03 2016 16:21:37 GMT+1000 (AUS Eastern Standard Time)
+var config = require('./gulpfile.config');
+
+
+var files = []
+    .concat(config.polyfillLibs)
+    .concat(config.angular2Libs)
+    .concat([
+        'node_modules/angular2/bundles/testing.dev.js'
+    ])
+    .concat(config.foundationSitesLibs)
+    .concat([
+        'src/test/boot.js',
+        {pattern: 'src/test/*.spec.js', included: false, watched: false}
+    ]);
+
+console.log('karma files:', files);
 
 module.exports = function (config) {
     config.set({
@@ -14,9 +28,13 @@ module.exports = function (config) {
 
 
         // list of files / patterns to load in the browser
-        files: [
-            './test/test1.js'
-        ],
+        files: files,
+
+
+        proxies: {
+            "/test/": "/base/src/test/",
+            '/node_modules/': '/base/node_modules/'
+        },
 
 
         // list of files to exclude
@@ -48,7 +66,7 @@ module.exports = function (config) {
 
 
         // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: true,
+        autoWatch: false,
 
 
         // start these browsers
@@ -58,7 +76,7 @@ module.exports = function (config) {
 
         // Continuous Integration mode
         // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
+        singleRun: true,
 
         // Concurrency level
         // how many browser should be started simultaneous
