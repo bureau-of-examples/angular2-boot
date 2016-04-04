@@ -9,12 +9,17 @@ System.config({
         test: {
             format: 'cjs',
             defaultExtension: 'js'
+        },
+        app: {
+            format: 'cjs',
+            defaultExtension: 'js'
         }
     }
 });
 
 Promise.all([
-    System.import('./test/unit-test.spec')
+    System.import('./test/unit-test.spec'),
+    System.import('./app/services/UtilService.spec')
 ]).then(function() {
     __karma__.start();
 });

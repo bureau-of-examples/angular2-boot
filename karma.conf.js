@@ -10,7 +10,8 @@ var files = []
     .concat(config.foundationSitesLibs)
     .concat([
         'src/test/boot.js',
-        {pattern: 'src/test/*.spec.js', included: false, watched: false}
+        {pattern: 'src/test/*.spec.js', included: false, watched: false},
+        {pattern: 'src/app/**/*.js', included: false, watched: false}
     ]);
 
 console.log('karma files:', files);
@@ -33,7 +34,8 @@ module.exports = function (config) {
 
         proxies: {
             "/test/": "/base/src/test/",
-            '/node_modules/': '/base/node_modules/'
+            '/node_modules/': '/base/node_modules/',
+            '/app/': '/base/src/app/'
         },
 
 
