@@ -1,0 +1,25 @@
+<h2>Directive test</h2>
+<div>
+    <p abGreen>This has green directive</p>
+    <p abRed>This has red directive</p>
+    <p id="test111s" abGreen abRed #green="abGreen" #red="abRed">This has both</p>
+    <div>
+        <p>Green id: {{green.elementId}}</p>
+        <p>Red id: {{red.elementId}}</p>
+    </div>
+</div>
+
+<hr>
+<div class="template-container">
+    <ab-template>
+        <template>
+            <p>Template 2</p>
+        </template>
+
+        <template>
+            <p>Template 3</p>
+        </template>
+
+    </ab-template>
+    <p>sibling element</p>
+</div>

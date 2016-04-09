@@ -19,7 +19,7 @@ export class HeaderComponent {
 
     constructor(private dataService:DataService,
                 private http:Http,
-                @ViewQuery('bannerLink') bannerLinkQuery:QueryList<ElementRef>) {
+                @ViewQuery('#bannerLink') bannerLinkQuery:QueryList<ElementRef>) {
         bannerLinkQuery.changes.subscribe(list => {
             console.log('query returns elementRef: ', list.first);
             this.bannerLink = list.first;

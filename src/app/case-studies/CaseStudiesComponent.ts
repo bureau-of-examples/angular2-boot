@@ -4,6 +4,7 @@ import {LinkDataModel} from '../common/model/LinkDataModel';
 import {FinanceComponent} from './finance/FinanceComponent';
 import {EducationComponent} from './education/EducationComponent';
 import {RouteDestinationComponent} from '../common/navigation/RouteDestinationComponent';
+import {ProfessionalComponent} from './professional/ProfessionalComponent';
 
 @Component({
     templateUrl: './app/case-studies/CaseStudiesComponent.html',
@@ -11,7 +12,8 @@ import {RouteDestinationComponent} from '../common/navigation/RouteDestinationCo
 })
 @RouteConfig([
     {path: 'education', name: 'Education', component: EducationComponent, useAsDefault: true},
-    {path: 'finance', name: 'Finance', component: FinanceComponent }
+    {path: 'finance', name: 'Finance', component: FinanceComponent },
+    {path: 'professional', name: 'Professional', component: ProfessionalComponent }
 ])
 export class CaseStudiesComponent extends RouteDestinationComponent {
 
@@ -22,7 +24,8 @@ export class CaseStudiesComponent extends RouteDestinationComponent {
 
         this.navLinks = [
             {text: 'Education', routeName: 'Education'},
-            {text: 'Finance', routeName: 'Finance'}
+            {text: 'Finance', routeName: 'Finance'},
+            {text: 'Professional', routeName: 'Professional'}
         ];
     }
 }
