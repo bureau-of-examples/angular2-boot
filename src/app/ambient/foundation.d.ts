@@ -30,3 +30,4 @@ declare module JSOG {
 
 declare var toastr: any;
 
+declare var A2B$ : {gwtZone : any};

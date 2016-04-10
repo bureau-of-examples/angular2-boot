@@ -12,6 +12,7 @@ var yargs = require('yargs');
 ///////////////////////// Config //////////////////////////////////////////
 var scssPaths = config.styleFolder + '/**/*.scss';
 var jsLibPaths = batchReplace(config.jsLibs, 'node_modules', config.srcLibsFolder);
+jsLibPaths.splice(1, 0, './src/js/angular2-boot.js');
 jsLibPaths.push('./src/js/boot.js');
 var tsPaths = 'src/app/**/*.ts';
 var browserSupport = ['> 5%'];

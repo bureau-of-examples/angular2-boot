@@ -1,14 +1,13 @@
+///<reference path="../../ambient/foundation.d.ts" />
+
 import {
     Component, Directive, ElementRef, Renderer, ViewContainerRef, QueryList,
-    TemplateRef, ViewQuery, Query, AppViewManager, ViewChild, AfterViewInit
+    TemplateRef, ViewQuery, Query, AppViewManager, ViewChild, HostListener
 } from 'angular2/core';
 
 @Directive({
     selector: '[abGreen]',
-    exportAs: 'abGreen',
-    host: {
-        '(click)': 'addChild()'
-    }
+    exportAs: 'abGreen'
 })
 class GreenDirective {
 
@@ -20,7 +19,7 @@ class GreenDirective {
         this.elementId = elementRef.nativeElement.id;
     }
 
-    addChild() {
+    @HostListener('click') addChild() {
         if (this.templateRef !== null) {
             this.viewContainerRef.createEmbeddedView(this.templateRef);
         } else {
@@ -57,7 +56,7 @@ class TemplateComponent {
 
     private templateQuery:QueryList<TemplateRef>;
     private contentTemplateQuery:QueryList<TemplateRef>;
-    @ViewChild(GreenDirective) private greenDirective : GreenDirective;
+    @ViewChild(GreenDirective) private greenDirective:GreenDirective;
 
     constructor(private viewContainerRef:ViewContainerRef,
                 @ViewQuery(TemplateRef) templateQuery:QueryList<TemplateRef>,
@@ -85,7 +84,6 @@ class TemplateComponent {
     }
 }
 
-
 @Component({
     templateUrl: 'ProfessionalComponent.html',
     moduleId: module.id,
@@ -93,11 +91,20 @@ class TemplateComponent {
 })
 export class ProfessionalComponent {
 
+    count:number = 0;
+
     constructor(private renderer:Renderer, private appViewManager:AppViewManager, private elementRef:ElementRef) {
+        console.log(window.setInterval);
     }
 
     changeText() {
         let myDiv:ElementRef = this.appViewManager.getNamedElementInComponentView(this.elementRef, 'myDiv');
         this.renderer.setText(myDiv.nativeElement, 'Wow text is changed!');
+    }
+
+    increaseCount() {
+        setTimeout(() => {
+            this.count++;
+        }, 500);
     }
 }
