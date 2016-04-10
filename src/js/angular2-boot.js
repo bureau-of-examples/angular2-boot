@@ -1,8 +1,14 @@
-window.A2B$ = {
-    window : {}
-};
+(function(window){
 
-window.A2B$.window.setTimeout = window.setTimeout;
-window.A2B$.window.setInterval = window.setInterval;
-window.A2B$.window.clearTimeout = window.clearTimeout;
-window.A2B$.window.clearInterval = window.clearInterval;
+    var A2B$ = {
+        window : {}
+    };
+
+    A2B$.window.setTimeout = window.setTimeout;
+    A2B$.window.setInterval = window.setInterval;
+    A2B$.window.clearTimeout = window.clearTimeout;
+    A2B$.window.clearInterval = window.clearInterval;
+
+    window.A2B$ = A2B$;
+
+}(window));

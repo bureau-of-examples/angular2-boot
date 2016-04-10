@@ -32,6 +32,13 @@
     </div>
 </div>
 
+<footer>
+    <div>Test Area</div>
+    <div>
+        <button id="btnShowZone" class="button" >Show Zone 1</button>
+        <button class="button"  onclick="console.log(Zone.current)">Show Zone 2</button>
+    </div>
+</footer>
 <!-- inject:js -->
 <script src="libs/es6-shim/es6-shim.min.js"></script>
 <script src="js/angular2-boot.js"></script>
@@ -51,5 +58,12 @@
 <script src="js/boot.js"></script>
 <!-- endinject -->
 
+<script>
+    Zone.current.fork({name: 'test1'}).run(function(){
+        $('#btnShowZone').click(function() {
+            console.log(Zone.current);
+        });
+    });
+</script>
 </body>
 </html>
