@@ -9,12 +9,9 @@ var files = []
     ])
     .concat(config.foundationSitesLibs)
     .concat([
-        'src/test/boot.js',
-        {pattern: 'src/test/*.spec.js', included: false, watched: false},
+        'load-tests.js',
         {pattern: 'src/app/**/*.js', included: false, watched: false}
     ]);
-
-console.log('karma files:', files);
 
 module.exports = function (config) {
     config.set({
@@ -33,7 +30,6 @@ module.exports = function (config) {
 
 
         proxies: {
-            "/test/": "/base/src/test/",
             '/node_modules/': '/base/node_modules/',
             '/app/': '/base/src/app/'
         },
@@ -45,13 +41,24 @@ module.exports = function (config) {
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: {},
+        preprocessors: {
+            './src/app/**/!(*.spec).js': ['coverage']
+        },
 
 
         // test results reporter to use
         // possible values: 'dots', 'progress'
         // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        reporters: ['mocha'],
+        reporters: ['mocha', 'coverage'],
+
+
+        // optionally, configure the reporter
+        coverageReporter: {
+            reporters:[
+                {type: 'html', dir:'coverage/'},
+                {type: 'text-summary'}
+            ]
+        },
 
 
         // web server port

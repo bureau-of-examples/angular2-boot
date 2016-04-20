@@ -8,8 +8,15 @@
 
 
 
-- Updated to beta 12.
+- Updated to beta 15.
 
+
+Runing Test:
+gulp test
+
+Add test:
+- Name is xxx.spec.ts
+- export a main function
 
 ### Todo
 * make bundles and lazy load them (async route).

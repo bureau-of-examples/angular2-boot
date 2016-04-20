@@ -13,5 +13,5 @@ bundle.css
 /src/primeng
 /src/assets/images/*
 /src/**/*.spec.js
-
+/coverage/*
 

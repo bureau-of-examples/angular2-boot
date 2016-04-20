@@ -210,7 +210,6 @@ gulp.task('test', [], function(done) {
         configFile: karmaConfigPath,
         singleRun: true
     }, done).start();
-    done();
 });
 
 ////////////////////////// Utilities //////////////////////////////////////
