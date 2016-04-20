@@ -135,7 +135,7 @@ gulp.task('lint-ts', [], function(){
     return gulp
         .src('src/app/**/*.ts')
         .pipe($.tslint({
-            rulesDirectory: ["node_modules/ng2lint/dist/src"],
+            rulesDirectory: ["node_modules/codelyzer/dist/src"],
             
         }))
         .pipe($.tslint.report('verbose'));
